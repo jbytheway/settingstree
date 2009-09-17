@@ -44,20 +44,6 @@ Node::Node(
   }
 }
 
-Node::Ptr Node::ptrToThis()
-{
-  if (NULL == parent)
-    return server->getSettings();
-  return parent->getChild(name);
-}
-
-Node::ConstPtr Node::ptrToThis() const
-{
-  if (NULL == parent)
-    return server->getSettings();
-  return parent->getChild(name);
-}
-
 std::string Node::getFullName() const
 {
   ostringstream nameStream;

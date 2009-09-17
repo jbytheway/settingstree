@@ -5,43 +5,26 @@
 #include <iosfwd>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <boost/utility.hpp>
 #include <boost/tuple/tuple.hpp>
 
 #include <settingstree/settingsuser.hpp>
+#include <settingstree/settings_callback.hpp>
 
 namespace settingsTree {
 
 class Branch;
 
-class Node : private boost::noncopyable {
+class Node :
+  public boost::enable_shared_from_this<Node>,
+  private boost::noncopyable {
   public:
     typedef boost::shared_ptr<Node> Ptr;
     typedef boost::shared_ptr<const Node> ConstPtr;
-  protected:
-    Node(
-        const std::string& name,
-        const std::string& readers,
-        const std::string& writers,
-        Branch* parent,
-        fuseki::Server* server
-      ); /* both readers and writers are interpreted as a comma-seperated list
-            of group names.  'server' is added automatically to both lists */
-  public:
-    virtual ~Node() {}
-  private:
-    std::string name;
-    Branch* parent;
-      /* node above this in the tree (NULL if this is the root node).
-       * Not owned by this. */
-    std::set<std::string> readingGroups; /* Groups with read permission */
-    std::set<std::string> writingGroups; /* Groups with write permission */
-  protected:
-    fuseki::Server* server; /* The server whose tree this is */
 
-    virtual Node::Ptr ptrToThis();
-    virtual Node::ConstPtr ptrToThis() const;
-  public:
+    virtual ~Node() = 0;
+
     inline const std::string& getName() const { return name; }
     virtual bool isLeaf() const = 0;
     inline const std::set<std::string>& getReadingGroups() const {
@@ -80,6 +63,23 @@ class Node : private boost::noncopyable {
         std::list<std::string> nodeAddress,
         const SettingsUser* user
       ) const { return getRequestListRef(nodeAddress, user); }
+  protected:
+    Node(
+        const std::string& name,
+        const std::string& readers,
+        const std::string& writers,
+        Branch* parent,
+        settings_callback*
+      ); /* both readers and writers are interpreted as a comma-seperated list
+            of group names.  'server' is added automatically to both lists */
+    settings_callback* callback_;
+  private:
+    std::string name;
+    Branch* parent;
+      /* node above this in the tree (NULL if this is the root node).
+       * Not owned by this. */
+    std::set<std::string> readingGroups; /* Groups with read permission */
+    std::set<std::string> writingGroups; /* Groups with write permission */
 };
 
 }

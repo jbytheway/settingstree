@@ -17,7 +17,7 @@ class Branch : public Node {
         const std::string& readers,
         const std::string& writers,
         Branch* parent,
-        Server* server
+        settings_callback*
       );
   private:
     u_map<std::string, Node::Ptr>::type children;
