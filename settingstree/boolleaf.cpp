@@ -4,9 +4,9 @@ using namespace fuseki;
 using namespace fuseki::settingsTree;
 
 BoolLeaf::BoolLeaf(
-    const String& name,
-    const String& readers,
-    const String& writers,
+    const std::string& name,
+    const std::string& readers,
+    const std::string& writers,
     Branch* parent,
     Server* server,
     bool v
@@ -16,13 +16,13 @@ BoolLeaf::BoolLeaf(
 {
 }
 
-String BoolLeaf::setValue(const String& v)
+std::string BoolLeaf::setValue(const std::string& v)
 {
   if (v == "true" || v == "1" || v == "on") {
     if (value) {
       return "setting already has that value";
     } else {
-      String reason;
+      std::string reason;
       if ("" != (reason = server->settingAlteringCallback<bool>(this, true))) {
         return reason;
       }
@@ -34,7 +34,7 @@ String BoolLeaf::setValue(const String& v)
     if (!value) {
       return "setting already has that value";
     } else {
-      String reason;
+      std::string reason;
       if ("" != (reason = server->settingAlteringCallback<bool>(this, false))) {
         return reason;
       }
@@ -46,9 +46,9 @@ String BoolLeaf::setValue(const String& v)
   return "invalid value for boolean leaf";
 }
 
-std::set<String> BoolLeaf::getValue() const
+std::set<std::string> BoolLeaf::getValue() const
 {
-  std::set<String> result;
+  std::set<std::string> result;
   if (value) {
     result.insert("true");
   } else {

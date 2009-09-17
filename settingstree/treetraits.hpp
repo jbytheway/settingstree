@@ -17,12 +17,12 @@ struct TreeTraits {
 };
 
 template<>
-struct TreeTraits<String> {
+struct TreeTraits<std::string> {
   typedef StringLeaf LeafType;
 };
 
 template<>
-struct TreeTraits<std::set<String> > {
+struct TreeTraits<std::set<std::string> > {
   typedef StringSetLeaf LeafType;
 };
 

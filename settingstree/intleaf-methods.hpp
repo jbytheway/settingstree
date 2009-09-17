@@ -7,9 +7,9 @@ namespace settingsTree {
 
 template<typename T>
 IntLeaf<T>::IntLeaf(
-    const String& name,
-    const String& readers,
-    const String& writers,
+    const std::string& name,
+    const std::string& readers,
+    const std::string& writers,
     Branch* parent,
     Server* server,
     T v
@@ -20,13 +20,13 @@ IntLeaf<T>::IntLeaf(
 }  
 
 template<typename T>
-String IntLeaf<T>::setValue(const String& s)
+std::string IntLeaf<T>::setValue(const std::string& s)
 {
   T v = sakusen::numFromString<T>(s);
   if (v == value) {
     return "setting already has that value";
   }
-  String reason;
+  std::string reason;
   if ("" != (reason = server->settingAlteringCallback<T>(this, v))) {
     return reason;
   }
@@ -36,9 +36,9 @@ String IntLeaf<T>::setValue(const String& s)
 }
 
 template<typename T>
-std::set<String> IntLeaf<T>::getValue() const
+std::set<std::string> IntLeaf<T>::getValue() const
 {
-  std::set<String> result;
+  std::set<std::string> result;
   result.insert(sakusen::numToString(value));
   return result;
 }

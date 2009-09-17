@@ -21,26 +21,26 @@ class SettingsUser {
     /** \brief Standard constructor
      *
      * Initializes user as a member of the groups "world" and \a group. */
-    SettingsUser(const String& group);
+    SettingsUser(const std::string& group);
     SettingsUser(const SettingsUser&);
   public:
     /** \brief Destructor */
     virtual ~SettingsUser() {}
   private:
-    std::set<String> groups;
+    std::set<std::string> groups;
 
   public:
     /** \return true iff this user belongs to the group \a group */
-    inline bool hasGroup(const String& group) const {
+    inline bool hasGroup(const std::string& group) const {
       return groups.find(group) != groups.end();
     }
     /** \return true iff this user belongs to at least one of the groups in \a
      * groupsToCheck */
-    bool hasGroupIn(const std::set<String>& groupsToCheck) const;
+    bool hasGroupIn(const std::set<std::string>& groupsToCheck) const;
     /** \brief Adds a group to those of which this user is a member */
-    inline void addGroup(const String& group) { groups.insert(group); }
+    inline void addGroup(const std::string& group) { groups.insert(group); }
     /** \brief Removes a group from those to which this user is a member */
-    inline void removeGroup(const String& group) {
+    inline void removeGroup(const std::string& group) {
       assert(hasGroup(group));
       groups.erase(group);
     }

@@ -11,9 +11,9 @@ using namespace fuseki;
 using namespace fuseki::settingsTree;
 
 Node::Node(
-    const String& n,
-    const String& readers,
-    const String& writers,
+    const std::string& n,
+    const std::string& readers,
+    const std::string& writers,
     Branch* p,
     Server* s
   ) :
@@ -29,16 +29,16 @@ Node::Node(
   readingGroups.insert("server");
   writingGroups.insert("server");
 
-  list<String> readerList = stringUtils_split<list<String> >(readers, ",");
+  list<std::string> readerList = stringUtils_split<list<std::string> >(readers, ",");
 
-  for (list<String>::iterator reader = readerList.begin();
+  for (list<std::string>::iterator reader = readerList.begin();
       reader != readerList.end(); reader++) {
     readingGroups.insert(*reader);
   }
 
-  list<String> writerList = stringUtils_split<list<String> >(writers, ",");
+  list<std::string> writerList = stringUtils_split<list<std::string> >(writers, ",");
 
-  for (list<String>::iterator writer = writerList.begin();
+  for (list<std::string>::iterator writer = writerList.begin();
       writer != writerList.end(); writer++) {
     writingGroups.insert(*writer);
   }
@@ -58,14 +58,14 @@ Node::ConstPtr Node::ptrToThis() const
   return parent->getChild(name);
 }
 
-String Node::getFullName() const
+std::string Node::getFullName() const
 {
   ostringstream nameStream;
   streamFullName(nameStream);
   return nameStream.str();
 }
 
-void Node::appendFullNameAsList(std::list<String>& fullName) const
+void Node::appendFullNameAsList(std::list<std::string>& fullName) const
 {
   if (parent != NULL) {
     parent->appendFullNameAsList(fullName);
@@ -75,9 +75,9 @@ void Node::appendFullNameAsList(std::list<String>& fullName) const
   }
 }
 
-list<String> Node::getFullNameAsList() const
+list<std::string> Node::getFullNameAsList() const
 {
-  list<String> fullName;
+  list<std::string> fullName;
   appendFullNameAsList(fullName);
   return fullName;
 }

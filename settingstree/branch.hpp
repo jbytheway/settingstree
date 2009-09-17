@@ -13,36 +13,36 @@ class Branch : public Node {
     typedef boost::shared_ptr<const Branch> ConstPtr;
   protected:
     Branch(
-        const String& name,
-        const String& readers,
-        const String& writers,
+        const std::string& name,
+        const std::string& readers,
+        const std::string& writers,
         Branch* parent,
         Server* server
       );
   private:
-    u_map<String, Node::Ptr>::type children;
+    u_map<std::string, Node::Ptr>::type children;
 
   protected:
     Node::Ptr addChild(Node::Ptr child);
-    void removeChild(String name);
-    virtual Node::Ptr getNodeByListRef(std::list<String>& nodeAddress);
-    virtual String changeRequestListRef(
-        std::list<String>& setting,
-        const String& value,
+    void removeChild(std::string name);
+    virtual Node::Ptr getNodeByListRef(std::list<std::string>& nodeAddress);
+    virtual std::string changeRequestListRef(
+        std::list<std::string>& setting,
+        const std::string& value,
         const SettingsUser* user
       );
-    virtual boost::tuple<String, std::set<String>, Node::ConstPtr>
+    virtual boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
       getRequestListRef(
-        std::list<String>& nodeAddress,
+        std::list<std::string>& nodeAddress,
         const SettingsUser* user
       ) const;
   public:
     bool isLeaf() const { return false; }
-    std::set<String> getChildNames() const;
+    std::set<std::string> getChildNames() const;
     /* Returns Node::Ptr() if no such child */
-    Node::Ptr getChild(String name);
+    Node::Ptr getChild(std::string name);
     /* Returns Node::ConstPtr() if no such child */
-    Node::ConstPtr getChild(String name) const;
+    Node::ConstPtr getChild(std::string name) const;
 };
 
 }

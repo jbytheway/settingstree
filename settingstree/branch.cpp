@@ -7,9 +7,9 @@ using namespace fuseki;
 using namespace fuseki::settingsTree;
 
 Branch::Branch(
-    const String& name,
-    const String& readers,
-    const String& writers,
+    const std::string& name,
+    const std::string& readers,
+    const std::string& writers,
     Branch* parent,
     Server* server
   ) :
@@ -24,14 +24,14 @@ Node::Ptr Branch::addChild(Node::Ptr child) {
   return child;
 }
 
-void Branch::removeChild(String name) {
+void Branch::removeChild(std::string name) {
   assert(children.count(name));
   children.erase(name);
   server->settingAlteredCallback(ptrToThis());
 }
 
 Node::Ptr Branch::getNodeByListRef(
-    list<String>& nodeAddress
+    list<std::string>& nodeAddress
   )
 {
   if (nodeAddress.empty()) {
@@ -50,13 +50,13 @@ Node::Ptr Branch::getNodeByListRef(
   return child->getNodeByListRef(nodeAddress);
 }
 
-String Branch::changeRequestListRef(
-    list<String>& setting,
-    const String& value,
+std::string Branch::changeRequestListRef(
+    list<std::string>& setting,
+    const std::string& value,
     const SettingsUser* user)
 {
   if (!user->hasReadPermissionFor(ptrToThis())) {
-    return String("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
   
@@ -67,7 +67,7 @@ String Branch::changeRequestListRef(
   Node::Ptr child = getChild(setting.front());
 
   if (child == NULL) {
-    return String("node '") + setting.front() + "' not found in '" +
+    return std::string("node '") + setting.front() + "' not found in '" +
       getFullName() + "'";
   }
 
@@ -76,14 +76,14 @@ String Branch::changeRequestListRef(
   return child->changeRequestListRef(setting, value, user);
 }
 
-boost::tuple<String, std::set<String>, Node::ConstPtr>
+boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
 Branch::getRequestListRef(
-    std::list<String>& nodeAddress,
+    std::list<std::string>& nodeAddress,
     const SettingsUser* user
   ) const
 {
   if (!user->hasReadPermissionFor(ptrToThis())) {
-    return String("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
   
@@ -95,8 +95,8 @@ Branch::getRequestListRef(
 
   if (!child) {
     return boost::make_tuple(
-        String("node '") + nodeAddress.front() + "' not found in '" +
-        getFullName() + "'", set<String>(), Ptr()
+        std::string("node '") + nodeAddress.front() + "' not found in '" +
+        getFullName() + "'", set<std::string>(), Ptr()
       );
   }
 
@@ -105,19 +105,19 @@ Branch::getRequestListRef(
   return child->getRequestListRef(nodeAddress, user);
 }
 
-set<String> Branch::getChildNames() const
+set<std::string> Branch::getChildNames() const
 {
-  set<String> childNames;
-  for (u_map<String, Node::Ptr>::type::const_iterator
+  set<std::string> childNames;
+  for (u_map<std::string, Node::Ptr>::type::const_iterator
       child = children.begin(); child != children.end(); child++) {
     childNames.insert(child->second->getName());
   }
   return childNames;
 }
 
-Node::Ptr Branch::getChild(String name)
+Node::Ptr Branch::getChild(std::string name)
 {
-  u_map<String, Node::Ptr>::type::iterator child =
+  u_map<std::string, Node::Ptr>::type::iterator child =
     children.find(name);
 
   if (child == children.end()) {
@@ -127,9 +127,9 @@ Node::Ptr Branch::getChild(String name)
   return child->second;
 }
 
-Node::ConstPtr Branch::getChild(String name) const
+Node::ConstPtr Branch::getChild(std::string name) const
 {
-  u_map<String, Node::Ptr>::type::const_iterator child =
+  u_map<std::string, Node::Ptr>::type::const_iterator child =
     children.find(name);
 
   if (child == children.end()) {

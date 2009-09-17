@@ -7,26 +7,26 @@ using namespace fuseki;
 using namespace fuseki::settingsTree;
 
 StringSetLeaf::StringSetLeaf(
-    const String& name,
-    const String& readers,
-    const String& writers,
+    const std::string& name,
+    const std::string& readers,
+    const std::string& writers,
     Branch* parent,
     Server* server,
-    const std::set<String>& initialValue
+    const std::set<std::string>& initialValue
   ) :
   Leaf(name, readers, writers, parent, server),
   value(initialValue)
 {
 }
 
-String StringSetLeaf::setValue(const String& v)
+std::string StringSetLeaf::setValue(const std::string& v)
 {
   if (v.empty()) {
     return "When setting the value of a list leaf, the first character must "
         "be '0', '+' or '-'";
   }
   
-  set<String> newValue = value;
+  set<std::string> newValue = value;
   
   switch (v[0]) {
     case '0':
@@ -38,18 +38,18 @@ String StringSetLeaf::setValue(const String& v)
       break;
     case '+':
       {
-        String adding = v.substr(1);
+        std::string adding = v.substr(1);
         if (newValue.count(adding)) {
-          return "String to be added already in list";
+          return "std::string to be added already in list";
         }
         newValue.insert(adding);
       }
       break;
     case '-':
       {
-        String erasing = v.substr(1);
+        std::string erasing = v.substr(1);
         if (0 == newValue.count(erasing)) {
-          return "String to be removed not in list";
+          return "std::string to be removed not in list";
         }
         newValue.erase(erasing);
       }
@@ -59,7 +59,7 @@ String StringSetLeaf::setValue(const String& v)
         "be '0', '+' or '-'";
   }
 
-  String reason;
+  std::string reason;
   if ("" != 
       (reason = server->settingAlteringCallback(this, newValue))
     ) {
@@ -69,7 +69,7 @@ String StringSetLeaf::setValue(const String& v)
   return "";
 }
 
-set<String> StringSetLeaf::getValue() const
+set<std::string> StringSetLeaf::getValue() const
 {
   return value;
 }

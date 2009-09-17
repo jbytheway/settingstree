@@ -13,21 +13,21 @@ class StringSetLeaf : public Leaf {
     typedef boost::shared_ptr<const StringSetLeaf> ConstPtr;
     
     StringSetLeaf(
-        const String& name,
-        const String& readers,
-        const String& writers,
+        const std::string& name,
+        const std::string& readers,
+        const std::string& writers,
         Branch* parent,
         Server* server,
-        const std::set<String>& initialValue = std::set<String>()
+        const std::set<std::string>& initialValue = std::set<std::string>()
       );
     virtual ~StringSetLeaf() { }
   private:
-    std::set<String> value;
+    std::set<std::string> value;
   protected:
-    virtual String setValue(const String& v);
-    virtual std::set<String> getValue() const;
+    virtual std::string setValue(const std::string& v);
+    virtual std::set<std::string> getValue() const;
   public:
-    inline const std::set<String>& getValueAsSet() const {
+    inline const std::set<std::string>& getValueAsSet() const {
       return value;
     }
 };

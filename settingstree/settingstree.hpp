@@ -14,18 +14,18 @@ class SettingsTree : public Branch {
 
     SettingsTree(Server* server);
   private:
-    std::list<String> stringNodeAddressToList(const String& nodeAddress) const;
+    std::list<std::string> stringNodeAddressToList(const std::string& nodeAddress) const;
   public:
-    String changeRequest(
-        const String& node,
-        const String& value,
+    std::string changeRequest(
+        const std::string& node,
+        const std::string& value,
         const SettingsUser* user
       );
-    boost::tuple<String, std::set<String>, Node::ConstPtr> getRequest(
-        const String& nodeAddress,
+    boost::tuple<std::string, std::set<std::string>, Node::ConstPtr> getRequest(
+        const std::string& nodeAddress,
         const SettingsUser* user
       ) const;
-    Node::Ptr getNode(const String& nodeAddress);
+    Node::Ptr getNode(const std::string& nodeAddress);
     inline ServerBranch::Ptr getServerBranch() {
       return boost::dynamic_pointer_cast<ServerBranch>(
           getNode("server")

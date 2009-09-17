@@ -6,22 +6,22 @@ using namespace fuseki::settingsTree;
 
 namespace fuseki {
 
-SettingsUser::SettingsUser(const String& group) :
+SettingsUser::SettingsUser(const std::string& group) :
   groups()
 {
   groups.insert(group);
   groups.insert("world");
 }
 
-bool SettingsUser::hasGroupIn(const std::set<String>& groupsToCheck) const
+bool SettingsUser::hasGroupIn(const std::set<std::string>& groupsToCheck) const
 {
   /* We have to determine whether the two sets groups and groupsToCheck have an
    * intersection.  I thought there would be an STL algorithm for this, but
    * here doesn't appear to be.  There is the "setintersection" algorithm, but
    * that won't abort when it finds an intersection.  So, we do it "by hand" */
   
-  std::set<String>::const_iterator i1 = groups.begin();
-  std::set<String>::const_iterator i2 = groupsToCheck.begin();
+  std::set<std::string>::const_iterator i1 = groups.begin();
+  std::set<std::string>::const_iterator i2 = groupsToCheck.begin();
 
   while (true) {
     if (i1 == groups.end()) {

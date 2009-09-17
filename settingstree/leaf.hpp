@@ -11,31 +11,31 @@ class Leaf : public Node {
     typedef boost::shared_ptr<Leaf> Ptr;
     typedef boost::shared_ptr<const Leaf> ConstPtr;
     Leaf(
-        const String& name,
-        const String& readers,
-        const String& writers,
+        const std::string& name,
+        const std::string& readers,
+        const std::string& writers,
         Branch* parent,
         Server* server
       );
     virtual ~Leaf();
   protected:
     virtual Node::Ptr getNodeByListRef(
-        std::list<String>& nodeAddress
+        std::list<std::string>& nodeAddress
       );
-    virtual String changeRequestListRef(
-        std::list<String>& nodeAddress,
-        const String& value,
+    virtual std::string changeRequestListRef(
+        std::list<std::string>& nodeAddress,
+        const std::string& value,
         const SettingsUser* client
       );
-    virtual boost::tuple<String, std::set<String>, Node::ConstPtr>
+    virtual boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
       getRequestListRef(
-        std::list<String>& nodeAddress,
+        std::list<std::string>& nodeAddress,
         const SettingsUser* client
       ) const;
-    virtual String setValue(const String& v) = 0;
+    virtual std::string setValue(const std::string& v) = 0;
   public:
     bool isLeaf() const { return true; }
-    virtual std::set<String> getValue() const = 0;
+    virtual std::set<std::string> getValue() const = 0;
 };
 
 }

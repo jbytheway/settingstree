@@ -13,9 +13,9 @@ class IntLeaf : public Leaf {
   SAKUSEN_STATIC_ASSERT((!boost::is_same<T, bool>::value));
   public:
     IntLeaf(
-        const String& name,
-        const String& readers,
-        const String& writers,
+        const std::string& name,
+        const std::string& readers,
+        const std::string& writers,
         Branch* parent,
         Server* server,
         T value = 0
@@ -24,8 +24,8 @@ class IntLeaf : public Leaf {
   private:
     T value;
   protected:
-    virtual String setValue(const String& v);
-    virtual std::set<String> getValue() const;
+    virtual std::string setValue(const std::string& v);
+    virtual std::set<std::string> getValue() const;
   public:
     inline T getValueAsInt() const { return value; }
 };

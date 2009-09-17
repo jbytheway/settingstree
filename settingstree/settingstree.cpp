@@ -16,14 +16,14 @@ SettingsTree::SettingsTree(Server* server) :
   addChild(Node::Ptr(new PluginsBranch(this, server)));
 }
 
-list<String> SettingsTree::stringNodeAddressToList(
-    const String& nodeAddress
+list<std::string> SettingsTree::stringNodeAddressToList(
+    const std::string& nodeAddress
   ) const
 {
-  list<String> addressAsList =
-    stringUtils_split<list<String> >(nodeAddress, SETTINGS_DELIMITER);
+  list<std::string> addressAsList =
+    stringUtils_split<list<std::string> >(nodeAddress, SETTINGS_DELIMITER);
   /* Remove effect of leading, trailing or duplicate delimiters */
-  list<String>::iterator name = addressAsList.begin();
+  list<std::string>::iterator name = addressAsList.begin();
   while (name != addressAsList.end()) {
     if (name->empty()) {
       name = addressAsList.erase(name);
@@ -34,14 +34,14 @@ list<String> SettingsTree::stringNodeAddressToList(
   return addressAsList;
 }
 
-Node::Ptr SettingsTree::getNode(const String& nodeAddress)
+Node::Ptr SettingsTree::getNode(const std::string& nodeAddress)
 {
   return getNodeByList(stringNodeAddressToList(nodeAddress));
 }
 
-String SettingsTree::changeRequest(
-    const String& nodeAddress,
-    const String& value,
+std::string SettingsTree::changeRequest(
+    const std::string& nodeAddress,
+    const std::string& value,
     const SettingsUser* user)
 {
   return changeRequestList(
@@ -49,9 +49,9 @@ String SettingsTree::changeRequest(
     );
 }
 
-boost::tuple<String, std::set<String>, Node::ConstPtr>
+boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
 SettingsTree::getRequest(
-    const String& nodeAddress,
+    const std::string& nodeAddress,
     const SettingsUser* user
   ) const
 {

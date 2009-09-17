@@ -6,9 +6,9 @@ using namespace fuseki;
 using namespace fuseki::settingsTree;
 
 Leaf::Leaf(
-    const String& name,
-    const String& readers,
-    const String& writers,
+    const std::string& name,
+    const std::string& readers,
+    const std::string& writers,
     Branch* parent,
     Server* server
   ) :
@@ -20,7 +20,7 @@ Leaf::~Leaf()
 {
 }
 
-Node::Ptr Leaf::getNodeByListRef(list<String>& nodeAddress)
+Node::Ptr Leaf::getNodeByListRef(list<std::string>& nodeAddress)
 {
   if (!nodeAddress.empty()) {
     Fatal("sought child of leaf '" << getFullName() << "'");
@@ -29,28 +29,28 @@ Node::Ptr Leaf::getNodeByListRef(list<String>& nodeAddress)
   return ptrToThis();
 }
 
-String Leaf::changeRequestListRef(
-    list<String>& nodeAddress,
-    const String& value,
+std::string Leaf::changeRequestListRef(
+    list<std::string>& nodeAddress,
+    const std::string& value,
     const SettingsUser* user)
 {
   //Debug("checking permissions for node " << getFullName());
   
   if (!user->hasReadPermissionFor(ptrToThis())) {
-    return String("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
   
   if (!nodeAddress.empty()) {
-    return String("node '") + getFullName() + "' is a leaf and has no child";
+    return std::string("node '") + getFullName() + "' is a leaf and has no child";
   }
   
   if (!user->hasWritePermissionFor(ptrToThis())) {
-    return String("cannot write to node '") + getFullName() +
+    return std::string("cannot write to node '") + getFullName() +
       "': permission denied";
   }
 
-  String reason = setValue(value);
+  std::string reason = setValue(value);
 
   if (reason == "") {
     server->settingAlteredCallback(ptrToThis());
@@ -59,19 +59,19 @@ String Leaf::changeRequestListRef(
   return reason;
 }
 
-boost::tuple<String, std::set<String>, Node::ConstPtr>
+boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
 Leaf::getRequestListRef(
-    std::list<String>& nodeAddress,
+    std::list<std::string>& nodeAddress,
     const SettingsUser* user
   ) const
 {
   if (!user->hasReadPermissionFor(ptrToThis())) {
-    return String("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
   
   if (!nodeAddress.empty()) {
-    return String("node '") + getFullName() + "' is a leaf and has no child";
+    return std::string("node '") + getFullName() + "' is a leaf and has no child";
   }
 
   return boost::make_tuple("", getValue(), ptrToThis());
