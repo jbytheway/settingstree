@@ -1,8 +1,12 @@
 #include <settingstree/node.hpp>
 
-#include <settingstree/branch.hpp>
-
 #include <sstream>
+
+#include <boost/algorithm/string/split.hpp>
+#include <boost/spirit/home/phoenix/operator/comparison.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+#include <settingstree/branch.hpp>
+#include <settingstree/delimiter.hpp>
 
 namespace settingsTree {
 
@@ -13,28 +17,34 @@ Node::Node(
     Branch* p,
     settings_callback* callback
   ) :
+  callback_(callback),
   name(n),
   parent(p),
   readingGroups(),
-  writingGroups(),
-  callback_(callback)
+  writingGroups()
 {
   assert((p == NULL) == n.empty());
-  assert(s != NULL);
+  assert(callback != NULL);
 
   readingGroups.insert("server");
   writingGroups.insert("server");
 
-  list<std::string> readerList = stringUtils_split<list<std::string> >(readers, ",");
+  std::list<std::string> readerList;
+  boost::algorithm::split(
+      readerList, readers, boost::phoenix::arg_names::arg1 == ','
+    );
 
-  for (list<std::string>::iterator reader = readerList.begin();
+  for (std::list<std::string>::iterator reader = readerList.begin();
       reader != readerList.end(); reader++) {
     readingGroups.insert(*reader);
   }
 
-  list<std::string> writerList = stringUtils_split<list<std::string> >(writers, ",");
+  std::list<std::string> writerList;
+  boost::algorithm::split(
+      writerList, writers, boost::phoenix::arg_names::arg1 == ','
+    );
 
-  for (list<std::string>::iterator writer = writerList.begin();
+  for (std::list<std::string>::iterator writer = writerList.begin();
       writer != writerList.end(); writer++) {
     writingGroups.insert(*writer);
   }
@@ -42,7 +52,7 @@ Node::Node(
 
 std::string Node::getFullName() const
 {
-  ostringstream nameStream;
+  std::ostringstream nameStream;
   streamFullName(nameStream);
   return nameStream.str();
 }
@@ -57,20 +67,20 @@ void Node::appendFullNameAsList(std::list<std::string>& fullName) const
   }
 }
 
-list<std::string> Node::getFullNameAsList() const
+std::list<std::string> Node::getFullNameAsList() const
 {
-  list<std::string> fullName;
+  std::list<std::string> fullName;
   appendFullNameAsList(fullName);
   return fullName;
 }
 
-void Node::streamFullName(ostream& nameStream) const
+void Node::streamFullName(std::ostream& nameStream) const
 {
   if (parent != NULL) {
     parent->streamFullName(nameStream);
   }
   if (!name.empty()) {
-    nameStream << SETTINGS_DELIMITER << name;
+    nameStream << SETTINGSTREE_DELIMITER << name;
   }
 }
 
