@@ -3,6 +3,8 @@
 
 #include <list>
 
+#include <boost/unordered_map.hpp>
+
 #include <settingstree/node.hpp>
 
 namespace settingsTree {
@@ -20,7 +22,7 @@ class Branch : public Node {
         settings_callback*
       );
   private:
-    u_map<std::string, Node::Ptr>::type children;
+    boost::unordered_map<std::string, Node::Ptr> children;
 
   protected:
     Node::Ptr addChild(Node::Ptr child);

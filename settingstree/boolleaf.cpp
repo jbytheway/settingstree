@@ -1,17 +1,16 @@
 #include <settingstree/boolleaf.hpp>
 
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 BoolLeaf::BoolLeaf(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
     Branch* parent,
-    Server* server,
+    settings_callback* callback,
     bool v
   ) :
-  Leaf(name, readers, writers, parent, server),
+  Leaf(name, readers, writers, parent, callback),
   value(v)
 {
 }
@@ -23,7 +22,8 @@ std::string BoolLeaf::setValue(const std::string& v)
       return "setting already has that value";
     } else {
       std::string reason;
-      if ("" != (reason = server->settingAlteringCallback<bool>(this, true))) {
+      if ("" !=
+          (reason = callback_->settingAlteringCallback<bool>(this, true))) {
         return reason;
       }
       
@@ -35,7 +35,8 @@ std::string BoolLeaf::setValue(const std::string& v)
       return "setting already has that value";
     } else {
       std::string reason;
-      if ("" != (reason = server->settingAlteringCallback<bool>(this, false))) {
+      if ("" !=
+          (reason = callback_->settingAlteringCallback<bool>(this, false))) {
         return reason;
       }
       
@@ -57,3 +58,4 @@ std::set<std::string> BoolLeaf::getValue() const
   return result;
 }
 
+}

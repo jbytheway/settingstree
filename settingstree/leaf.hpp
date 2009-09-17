@@ -15,7 +15,7 @@ class Leaf : public Node {
         const std::string& readers,
         const std::string& writers,
         Branch* parent,
-        Server* server
+        settings_callback*
       );
     virtual ~Leaf();
   protected:
