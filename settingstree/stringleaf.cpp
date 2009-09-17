@@ -1,7 +1,6 @@
 #include <settingstree/stringleaf.hpp>
 
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 StringLeaf::StringLeaf(
     const std::string& name,
@@ -31,5 +30,7 @@ std::set<std::string> StringLeaf::getValue() const
   std::set<std::string> result;
   result.insert(value);
   return result;
+}
+
 }
 

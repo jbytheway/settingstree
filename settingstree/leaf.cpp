@@ -1,9 +1,6 @@
 #include <settingstree/leaf.hpp>
 
-using namespace std;
-
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 Leaf::Leaf(
     const std::string& name,
@@ -75,5 +72,7 @@ Leaf::getRequestListRef(
   }
 
   return boost::make_tuple("", getValue(), ptrToThis());
+}
+
 }
 

@@ -1,10 +1,6 @@
 #include <settingstree/branch.hpp>
 
-using namespace std;
-
-using namespace sakusen;
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 Branch::Branch(
     const std::string& name,
@@ -137,5 +133,7 @@ Node::ConstPtr Branch::getChild(std::string name) const
   }
 
   return child->second;
+}
+
 }
 

@@ -1,10 +1,6 @@
 #include <settingstree/stringsetleaf.hpp>
 
-using namespace std;
-
-using namespace sakusen;
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 StringSetLeaf::StringSetLeaf(
     const std::string& name,
@@ -72,5 +68,7 @@ std::string StringSetLeaf::setValue(const std::string& v)
 set<std::string> StringSetLeaf::getValue() const
 {
   return value;
+}
+
 }
 

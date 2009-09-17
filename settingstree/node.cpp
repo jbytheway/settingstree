@@ -4,11 +4,7 @@
 
 #include <sstream>
 
-using namespace std;
-
-using namespace sakusen;
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 Node::Node(
     const std::string& n,
@@ -76,5 +72,7 @@ void Node::streamFullName(ostream& nameStream) const
   if (!name.empty()) {
     nameStream << SETTINGS_DELIMITER << name;
   }
+}
+
 }
 

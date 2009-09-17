@@ -2,9 +2,7 @@
 
 #include <settingstree/node.hpp>
 
-using namespace fuseki::settingsTree;
-
-namespace fuseki {
+namespace settingsTree {
 
 SettingsUser::SettingsUser(const std::string& group) :
   groups()

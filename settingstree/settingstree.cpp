@@ -1,10 +1,6 @@
 #include <settingstree/settingstree.hpp>
 
-using namespace std;
-
-using namespace sakusen;
-using namespace fuseki;
-using namespace fuseki::settingsTree;
+namespace settingsTree {
 
 SettingsTree::SettingsTree(Server* server) :
   Branch("", "world", "", NULL, server)
@@ -56,5 +52,7 @@ SettingsTree::getRequest(
   ) const
 {
   return getRequestList(stringNodeAddressToList(nodeAddress), user);
+}
+
 }
 
