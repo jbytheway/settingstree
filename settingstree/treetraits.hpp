@@ -1,10 +1,10 @@
 #ifndef SETTINGSTREE__TREETRAITS_H
 #define SETTINGSTREE__TREETRAITS_H
 
-#include "settingstree/intleaf.h"
-#include "settingstree/stringleaf.h"
-#include "settingstree/stringsetleaf.h"
-#include "settingstree/boolleaf.h"
+#include <settingstree/intleaf.hpp>
+#include <settingstree/stringleaf.hpp>
+#include <settingstree/stringsetleaf.hpp>
+#include <settingstree/boolleaf.hpp>
 
 namespace settingsTree {
 

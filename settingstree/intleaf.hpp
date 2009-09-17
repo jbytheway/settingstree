@@ -1,7 +1,7 @@
 #ifndef SETTINGSTREE__INTLEAF_HPP
 #define SETTINGSTREE__INTLEAF_HPP
 
-#include "leaf.h"
+#include <settingstree/leaf.hpp>
 
 namespace settingsTree {
 

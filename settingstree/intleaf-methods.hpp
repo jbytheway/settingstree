@@ -1,9 +1,7 @@
 #ifndef SETTINGSTREE__INTLEAF_METHODS_HPP
 #define SETTINGSTREE__INTLEAF_METHODS_HPP
 
-#include "intleaf.h"
-
-#include "server-methods.h"
+#include <settingstree/intleaf.hpp>
 
 namespace settingsTree {
 
