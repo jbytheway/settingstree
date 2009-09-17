@@ -1,5 +1,6 @@
 .libs
 .obj
+.makefrags
 *.la
 .*.swp
 /config.mk
