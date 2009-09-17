@@ -11,13 +11,13 @@ Node::Node(
     const std::string& readers,
     const std::string& writers,
     Branch* p,
-    Server* s
+    settings_callback* callback
   ) :
   name(n),
   parent(p),
   readingGroups(),
   writingGroups(),
-  server(s)
+  callback_(callback)
 {
   assert((p == NULL) == n.empty());
   assert(s != NULL);

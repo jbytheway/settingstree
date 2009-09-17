@@ -7,7 +7,7 @@ Leaf::Leaf(
     const std::string& readers,
     const std::string& writers,
     Branch* parent,
-    Server* server
+    settings_callback* callback
   ) :
   Node(name, readers, writers, parent, server)
 {

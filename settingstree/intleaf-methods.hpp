@@ -11,7 +11,7 @@ IntLeaf<T>::IntLeaf(
     const std::string& readers,
     const std::string& writers,
     Branch* parent,
-    Server* server,
+    settings_callback*,
     T v
   ) :
   Leaf(name, readers, writers, parent, server),

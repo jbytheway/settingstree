@@ -17,7 +17,7 @@ class StringSetLeaf : public Leaf {
         const std::string& readers,
         const std::string& writers,
         Branch* parent,
-        Server* server,
+        settings_callback*,
         const std::set<std::string>& initialValue = std::set<std::string>()
       );
     virtual ~StringSetLeaf() { }

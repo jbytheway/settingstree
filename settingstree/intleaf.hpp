@@ -17,7 +17,7 @@ class IntLeaf : public Leaf {
         const std::string& readers,
         const std::string& writers,
         Branch* parent,
-        Server* server,
+        settings_callback*,
         T value = 0
       );
     virtual ~IntLeaf() {}

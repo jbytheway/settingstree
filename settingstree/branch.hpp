@@ -27,13 +27,13 @@ class Branch : public Node {
   protected:
     Node::Ptr addChild(Node::Ptr child);
     void removeChild(std::string name);
-    virtual Node::Ptr getNodeByListRef(std::list<std::string>& nodeAddress);
+    virtual Node* getNodeByListRef(std::list<std::string>& nodeAddress);
     virtual std::string changeRequestListRef(
         std::list<std::string>& setting,
         const std::string& value,
         const SettingsUser* user
       );
-    virtual boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
+    virtual boost::tuple<std::string, std::set<std::string>, Node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
         const SettingsUser* user

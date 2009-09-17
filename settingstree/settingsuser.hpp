@@ -48,11 +48,11 @@ class SettingsUser {
     inline void clearGroups() { groups.clear(); }
     /** \return true iff this user has permission to read \a node */
     bool hasReadPermissionFor(
-        boost::shared_ptr<const settingsTree::Node> node
+        const settingsTree::Node* node
       ) const;
     /** \return true iff this user has permission to write \a node */
     bool hasWritePermissionFor(
-        boost::shared_ptr<const settingsTree::Node> node
+        const settingsTree::Node* node
       ) const;
 };
 

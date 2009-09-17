@@ -19,7 +19,7 @@ class Leaf : public Node {
       );
     virtual ~Leaf();
   protected:
-    virtual Node::Ptr getNodeByListRef(
+    virtual Node* getNodeByListRef(
         std::list<std::string>& nodeAddress
       );
     virtual std::string changeRequestListRef(
@@ -27,7 +27,7 @@ class Leaf : public Node {
         const std::string& value,
         const SettingsUser* client
       );
-    virtual boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
+    virtual boost::tuple<std::string, std::set<std::string>, Node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
         const SettingsUser* client

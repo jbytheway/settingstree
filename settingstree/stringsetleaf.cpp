@@ -7,7 +7,7 @@ StringSetLeaf::StringSetLeaf(
     const std::string& readers,
     const std::string& writers,
     Branch* parent,
-    Server* server,
+    settings_callback* callback,
     const std::set<std::string>& initialValue
   ) :
   Leaf(name, readers, writers, parent, server),

@@ -33,10 +33,10 @@ class Node :
     inline const std::set<std::string>& getWritingGroups() const {
       return writingGroups;
     }
-    virtual Node::Ptr getNodeByListRef(
+    virtual Node* getNodeByListRef(
         std::list<std::string>& nodeAddress
       ) = 0; /* Note: alters its argument nodeAddress */
-    inline Node::Ptr getNodeByList(
+    inline Node* getNodeByList(
         std::list<std::string> nodeAddress
       ) { return getNodeByListRef(nodeAddress); }
     virtual void streamFullName(std::ostream& nameStream) const;
@@ -53,7 +53,7 @@ class Node :
         const std::string& value,
         const SettingsUser* user
       ) { return changeRequestListRef(nodeAddress, value, user); }
-    virtual boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
+    virtual boost::tuple<std::string, std::set<std::string>, Node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
         const SettingsUser* user

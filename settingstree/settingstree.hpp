@@ -12,7 +12,7 @@ class SettingsTree : public Branch {
   public:
     typedef boost::shared_ptr<SettingsTree> Ptr;
 
-    SettingsTree(Server* server);
+    SettingsTree(settings_callback*);
   private:
     std::list<std::string> stringNodeAddressToList(const std::string& nodeAddress) const;
   public:

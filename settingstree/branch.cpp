@@ -1,5 +1,7 @@
 #include <settingstree/branch.hpp>
 
+#include <sstream>
+
 namespace settingsTree {
 
 Branch::Branch(
@@ -7,38 +9,39 @@ Branch::Branch(
     const std::string& readers,
     const std::string& writers,
     Branch* parent,
-    Server* server
+    settings_callback* callback
   ) :
-  Node(name, readers, writers, parent, server)
+  Node(name, readers, writers, parent, callback)
 {
 }
 
 Node::Ptr Branch::addChild(Node::Ptr child) {
   children[child->getName()] = child;
-  /* Can't use ptrToThis() because might still be constructing Server */
-  server->settingAlteredCallback(Node::Ptr(this, null_deleter()));
+  callback_->settingAlteredCallback(this);
   return child;
 }
 
 void Branch::removeChild(std::string name) {
   assert(children.count(name));
   children.erase(name);
-  server->settingAlteredCallback(ptrToThis());
+  callback_->settingAlteredCallback(this);
 }
 
-Node::Ptr Branch::getNodeByListRef(
-    list<std::string>& nodeAddress
+Node* Branch::getNodeByListRef(
+    std::list<std::string>& nodeAddress
   )
 {
   if (nodeAddress.empty()) {
-    return ptrToThis();
+    return this;
   }
 
   Node::Ptr child = getChild(nodeAddress.front());
   
   if (!child) {
-    Fatal("node '" << nodeAddress.front() << "' not found in '" <<
-        getFullName() << "'");
+    std::ostringstream os;
+    os << "node '" << nodeAddress.front() << "' not found in '" <<
+        getFullName() << "'";
+    throw std::logic_error(os.str());
   }
 
   nodeAddress.pop_front();
@@ -47,11 +50,11 @@ Node::Ptr Branch::getNodeByListRef(
 }
 
 std::string Branch::changeRequestListRef(
-    list<std::string>& setting,
+    std::list<std::string>& setting,
     const std::string& value,
     const SettingsUser* user)
 {
-  if (!user->hasReadPermissionFor(ptrToThis())) {
+  if (!user->hasReadPermissionFor(this)) {
     return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
@@ -72,19 +75,19 @@ std::string Branch::changeRequestListRef(
   return child->changeRequestListRef(setting, value, user);
 }
 
-boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
+boost::tuple<std::string, std::set<std::string>, Node const*>
 Branch::getRequestListRef(
     std::list<std::string>& nodeAddress,
     const SettingsUser* user
   ) const
 {
-  if (!user->hasReadPermissionFor(ptrToThis())) {
+  if (!user->hasReadPermissionFor(this)) {
     return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
   
   if (nodeAddress.empty()) {
-    return boost::make_tuple("", getChildNames(), ptrToThis());
+    return boost::make_tuple("", getChildNames(), this);
   }
 
   Node::ConstPtr child = getChild(nodeAddress.front());
@@ -92,7 +95,7 @@ Branch::getRequestListRef(
   if (!child) {
     return boost::make_tuple(
         std::string("node '") + nodeAddress.front() + "' not found in '" +
-        getFullName() + "'", set<std::string>(), Ptr()
+        getFullName() + "'", std::set<std::string>(), static_cast<Node*>(NULL)
       );
   }
 
@@ -101,10 +104,10 @@ Branch::getRequestListRef(
   return child->getRequestListRef(nodeAddress, user);
 }
 
-set<std::string> Branch::getChildNames() const
+std::set<std::string> Branch::getChildNames() const
 {
-  set<std::string> childNames;
-  for (u_map<std::string, Node::Ptr>::type::const_iterator
+  std::set<std::string> childNames;
+  for (boost::unordered_map<std::string, Node::Ptr>::const_iterator
       child = children.begin(); child != children.end(); child++) {
     childNames.insert(child->second->getName());
   }
@@ -113,7 +116,7 @@ set<std::string> Branch::getChildNames() const
 
 Node::Ptr Branch::getChild(std::string name)
 {
-  u_map<std::string, Node::Ptr>::type::iterator child =
+  boost::unordered_map<std::string, Node::Ptr>::iterator child =
     children.find(name);
 
   if (child == children.end()) {
@@ -125,7 +128,7 @@ Node::Ptr Branch::getChild(std::string name)
 
 Node::ConstPtr Branch::getChild(std::string name) const
 {
-  u_map<std::string, Node::Ptr>::type::const_iterator child =
+  boost::unordered_map<std::string, Node::Ptr>::const_iterator child =
     children.find(name);
 
   if (child == children.end()) {

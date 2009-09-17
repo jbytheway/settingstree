@@ -2,7 +2,7 @@
 
 namespace settingsTree {
 
-SettingsTree::SettingsTree(Server* server) :
+SettingsTree::SettingsTree(settings_callback* callback) :
   Branch("", "world", "", NULL, server)
 {
   addChild(Node::Ptr(new ServerBranch(this, server)));
