@@ -10,7 +10,7 @@ StringLeaf::StringLeaf(
     settings_callback* callback,
     const std::string& initialValue
   ) :
-  Leaf(name, readers, writers, parent, server),
+  Leaf(name, readers, writers, parent, callback),
   value(initialValue)
 {
 }
@@ -18,7 +18,7 @@ StringLeaf::StringLeaf(
 std::string StringLeaf::setValue(const std::string& v)
 {
   std::string reason;
-  if ("" != (reason = server->settingAlteringCallback(this, v))) {
+  if ("" != (reason = callback_->settingAlteringCallback(this, v))) {
     return reason;
   }
   value = v;

@@ -10,7 +10,7 @@ StringSetLeaf::StringSetLeaf(
     settings_callback* callback,
     const std::set<std::string>& initialValue
   ) :
-  Leaf(name, readers, writers, parent, server),
+  Leaf(name, readers, writers, parent, callback),
   value(initialValue)
 {
 }
@@ -22,7 +22,7 @@ std::string StringSetLeaf::setValue(const std::string& v)
         "be '0', '+' or '-'";
   }
   
-  set<std::string> newValue = value;
+  std::set<std::string> newValue = value;
   
   switch (v[0]) {
     case '0':
@@ -57,7 +57,7 @@ std::string StringSetLeaf::setValue(const std::string& v)
 
   std::string reason;
   if ("" != 
-      (reason = server->settingAlteringCallback(this, newValue))
+      (reason = callback_->settingAlteringCallback(this, newValue))
     ) {
     return reason;
   }
@@ -65,7 +65,7 @@ std::string StringSetLeaf::setValue(const std::string& v)
   return "";
 }
 
-set<std::string> StringSetLeaf::getValue() const
+std::set<std::string> StringSetLeaf::getValue() const
 {
   return value;
 }
