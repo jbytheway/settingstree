@@ -2,20 +2,20 @@
 
 namespace settingstree {
 
-StringSetLeaf::StringSetLeaf(
+string_set_leaf::string_set_leaf(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
-    Branch* parent,
+    branch* parent,
     settings_callback* callback,
     const std::set<std::string>& initialValue
   ) :
-  Leaf(name, readers, writers, parent, callback),
+  leaf(name, readers, writers, parent, callback),
   value(initialValue)
 {
 }
 
-std::string StringSetLeaf::setValue(const std::string& v)
+std::string string_set_leaf::setValue(const std::string& v)
 {
   if (v.empty()) {
     return "When setting the value of a list leaf, the first character must "
@@ -65,7 +65,7 @@ std::string StringSetLeaf::setValue(const std::string& v)
   return "";
 }
 
-std::set<std::string> StringSetLeaf::getValue() const
+std::set<std::string> string_set_leaf::getValue() const
 {
   return value;
 }

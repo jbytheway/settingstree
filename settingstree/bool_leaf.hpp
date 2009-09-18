@@ -5,17 +5,17 @@
 
 namespace settingstree {
 
-class BoolLeaf : public Leaf {
+class bool_leaf : public leaf {
   public:
-    BoolLeaf(
+    bool_leaf(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*,
         bool value = false
       );
-    virtual ~BoolLeaf() {}
+    virtual ~bool_leaf() {}
   private:
     bool value;
   protected:

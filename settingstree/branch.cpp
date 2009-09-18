@@ -4,30 +4,30 @@
 
 namespace settingstree {
 
-Branch::Branch(
+branch::branch(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
-    Branch* parent,
+    branch* parent,
     settings_callback* callback
   ) :
-  Node(name, readers, writers, parent, callback)
+  node(name, readers, writers, parent, callback)
 {
 }
 
-Node::Ptr Branch::addChild(Node::Ptr child) {
+node::Ptr branch::addChild(node::Ptr child) {
   children[child->getName()] = child;
   callback_->settingAlteredCallback(this);
   return child;
 }
 
-void Branch::removeChild(std::string name) {
+void branch::removeChild(std::string name) {
   assert(children.count(name));
   children.erase(name);
   callback_->settingAlteredCallback(this);
 }
 
-Node* Branch::getNodeByListRef(
+node* branch::getNodeByListRef(
     std::list<std::string>& nodeAddress
   )
 {
@@ -35,7 +35,7 @@ Node* Branch::getNodeByListRef(
     return this;
   }
 
-  Node::Ptr child = getChild(nodeAddress.front());
+  node::Ptr child = getChild(nodeAddress.front());
   
   if (!child) {
     std::ostringstream os;
@@ -49,10 +49,10 @@ Node* Branch::getNodeByListRef(
   return child->getNodeByListRef(nodeAddress);
 }
 
-std::string Branch::changeRequestListRef(
+std::string branch::changeRequestListRef(
     std::list<std::string>& setting,
     const std::string& value,
-    const SettingsUser* user)
+    const settings_user* user)
 {
   if (!user->hasReadPermissionFor(this)) {
     return std::string("cannot read node '") + getFullName() +
@@ -63,7 +63,7 @@ std::string Branch::changeRequestListRef(
     return "requested node '" + getFullName() + "' not a leaf";
   }
 
-  Node::Ptr child = getChild(setting.front());
+  node::Ptr child = getChild(setting.front());
 
   if (child == NULL) {
     return std::string("node '") + setting.front() + "' not found in '" +
@@ -75,10 +75,10 @@ std::string Branch::changeRequestListRef(
   return child->changeRequestListRef(setting, value, user);
 }
 
-boost::tuple<std::string, std::set<std::string>, Node const*>
-Branch::getRequestListRef(
+boost::tuple<std::string, std::set<std::string>, node const*>
+branch::getRequestListRef(
     std::list<std::string>& nodeAddress,
-    const SettingsUser* user
+    const settings_user* user
   ) const
 {
   if (!user->hasReadPermissionFor(this)) {
@@ -90,12 +90,12 @@ Branch::getRequestListRef(
     return boost::make_tuple("", getChildNames(), this);
   }
 
-  Node::ConstPtr child = getChild(nodeAddress.front());
+  node::ConstPtr child = getChild(nodeAddress.front());
 
   if (!child) {
     return boost::make_tuple(
         std::string("node '") + nodeAddress.front() + "' not found in '" +
-        getFullName() + "'", std::set<std::string>(), static_cast<Node*>(NULL)
+        getFullName() + "'", std::set<std::string>(), static_cast<node*>(NULL)
       );
   }
 
@@ -104,35 +104,35 @@ Branch::getRequestListRef(
   return child->getRequestListRef(nodeAddress, user);
 }
 
-std::set<std::string> Branch::getChildNames() const
+std::set<std::string> branch::getChildNames() const
 {
   std::set<std::string> childNames;
-  for (boost::unordered_map<std::string, Node::Ptr>::const_iterator
+  for (boost::unordered_map<std::string, node::Ptr>::const_iterator
       child = children.begin(); child != children.end(); child++) {
     childNames.insert(child->second->getName());
   }
   return childNames;
 }
 
-Node::Ptr Branch::getChild(std::string name)
+node::Ptr branch::getChild(std::string name)
 {
-  boost::unordered_map<std::string, Node::Ptr>::iterator child =
+  boost::unordered_map<std::string, node::Ptr>::iterator child =
     children.find(name);
 
   if (child == children.end()) {
-    return Node::Ptr();
+    return node::Ptr();
   }
 
   return child->second;
 }
 
-Node::ConstPtr Branch::getChild(std::string name) const
+node::ConstPtr branch::getChild(std::string name) const
 {
-  boost::unordered_map<std::string, Node::Ptr>::const_iterator child =
+  boost::unordered_map<std::string, node::Ptr>::const_iterator child =
     children.find(name);
 
   if (child == children.end()) {
-    return Node::ConstPtr();
+    return node::ConstPtr();
   }
 
   return child->second;

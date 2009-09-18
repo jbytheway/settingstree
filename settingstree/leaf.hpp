@@ -6,31 +6,31 @@
 
 namespace settingstree {
 
-class Leaf : public Node {
+class leaf : public node {
   public:
-    typedef boost::shared_ptr<Leaf> Ptr;
-    typedef boost::shared_ptr<const Leaf> ConstPtr;
-    Leaf(
+    typedef boost::shared_ptr<leaf> Ptr;
+    typedef boost::shared_ptr<const leaf> ConstPtr;
+    leaf(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*
       );
-    virtual ~Leaf();
+    virtual ~leaf();
   protected:
-    virtual Node* getNodeByListRef(
+    virtual node* getNodeByListRef(
         std::list<std::string>& nodeAddress
       );
     virtual std::string changeRequestListRef(
         std::list<std::string>& nodeAddress,
         const std::string& value,
-        const SettingsUser* client
+        const settings_user* client
       );
-    virtual boost::tuple<std::string, std::set<std::string>, Node const*>
+    virtual boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
-        const SettingsUser* client
+        const settings_user* client
       ) const;
     virtual std::string setValue(const std::string& v) = 0;
   public:

@@ -5,14 +5,14 @@
 
 namespace settingstree {
 
-class Leaf;
-class Node;
+class leaf;
+class node;
 
 class settings_callback {
   public:
     template<typename T>
-    std::string settingAlteringCallback(Leaf* altering, T newValue);
-    virtual void settingAlteredCallback(Node* altered) = 0;
+    std::string settingAlteringCallback(leaf* altering, T newValue);
+    virtual void settingAlteredCallback(node* altered) = 0;
   protected:
     settings_callback() {}
     settings_callback(settings_callback const&) {}

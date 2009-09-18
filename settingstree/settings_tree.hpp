@@ -8,24 +8,24 @@
 
 namespace settingstree {
 
-class SettingsTree : public Branch {
+class settings_tree : public branch {
   public:
-    typedef boost::shared_ptr<SettingsTree> Ptr;
+    typedef boost::shared_ptr<settings_tree> Ptr;
 
-    SettingsTree(settings_callback*);
+    settings_tree(settings_callback*);
   private:
     std::list<std::string> stringNodeAddressToList(const std::string& nodeAddress) const;
   public:
     std::string changeRequest(
         const std::string& node,
         const std::string& value,
-        const SettingsUser* user
+        const settings_user* user
       );
-    boost::tuple<std::string, std::set<std::string>, Node::ConstPtr> getRequest(
+    boost::tuple<std::string, std::set<std::string>, node::ConstPtr> getRequest(
         const std::string& nodeAddress,
-        const SettingsUser* user
+        const settings_user* user
       ) const;
-    Node* getNode(const std::string& nodeAddress);
+    node* getNode(const std::string& nodeAddress);
 };
 
 }

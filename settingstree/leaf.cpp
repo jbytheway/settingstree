@@ -4,22 +4,22 @@
 
 namespace settingstree {
 
-Leaf::Leaf(
+leaf::leaf(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
-    Branch* parent,
+    branch* parent,
     settings_callback* callback
   ) :
-  Node(name, readers, writers, parent, callback)
+  node(name, readers, writers, parent, callback)
 {
 }
 
-Leaf::~Leaf()
+leaf::~leaf()
 {
 }
 
-Node* Leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
+node* leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
 {
   if (!nodeAddress.empty()) {
     std::ostringstream os;
@@ -30,10 +30,10 @@ Node* Leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
   return this;
 }
 
-std::string Leaf::changeRequestListRef(
+std::string leaf::changeRequestListRef(
     std::list<std::string>& nodeAddress,
     const std::string& value,
-    const SettingsUser* user)
+    const settings_user* user)
 {
   //Debug("checking permissions for node " << getFullName());
   
@@ -60,10 +60,10 @@ std::string Leaf::changeRequestListRef(
   return reason;
 }
 
-boost::tuple<std::string, std::set<std::string>, Node const*>
-Leaf::getRequestListRef(
+boost::tuple<std::string, std::set<std::string>, node const*>
+leaf::getRequestListRef(
     std::list<std::string>& nodeAddress,
-    const SettingsUser* user
+    const settings_user* user
   ) const
 {
   if (!user->hasReadPermissionFor(this)) {

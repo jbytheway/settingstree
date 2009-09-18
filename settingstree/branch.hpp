@@ -9,42 +9,42 @@
 
 namespace settingstree {
 
-class Branch : public Node {
+class branch : public node {
   public:
-    typedef boost::shared_ptr<Branch> Ptr;
-    typedef boost::shared_ptr<const Branch> ConstPtr;
+    typedef boost::shared_ptr<branch> Ptr;
+    typedef boost::shared_ptr<const branch> ConstPtr;
   protected:
-    Branch(
+    branch(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*
       );
   private:
-    boost::unordered_map<std::string, Node::Ptr> children;
+    boost::unordered_map<std::string, node::Ptr> children;
 
   protected:
-    Node::Ptr addChild(Node::Ptr child);
+    node::Ptr addChild(node::Ptr child);
     void removeChild(std::string name);
-    virtual Node* getNodeByListRef(std::list<std::string>& nodeAddress);
+    virtual node* getNodeByListRef(std::list<std::string>& nodeAddress);
     virtual std::string changeRequestListRef(
         std::list<std::string>& setting,
         const std::string& value,
-        const SettingsUser* user
+        const settings_user* user
       );
-    virtual boost::tuple<std::string, std::set<std::string>, Node const*>
+    virtual boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
-        const SettingsUser* user
+        const settings_user* user
       ) const;
   public:
     bool isLeaf() const { return false; }
     std::set<std::string> getChildNames() const;
-    /* Returns Node::Ptr() if no such child */
-    Node::Ptr getChild(std::string name);
-    /* Returns Node::ConstPtr() if no such child */
-    Node::ConstPtr getChild(std::string name) const;
+    /* Returns node::Ptr() if no such child */
+    node::Ptr getChild(std::string name);
+    /* Returns node::ConstPtr() if no such child */
+    node::ConstPtr getChild(std::string name) const;
 };
 
 }

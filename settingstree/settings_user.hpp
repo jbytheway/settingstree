@@ -7,25 +7,25 @@
 
 namespace settingstree {
 
-class Node;
+class node;
 
 /** \brief Abstract class representing an object which can access or alter the
  * settings tree
  *
  * This class keeps track of what groups a user of the settings tree belongs to
  * so that permissions can be calculated appropriately. */
-class SettingsUser {
+class settings_user {
   private:
-    SettingsUser();
+    settings_user();
   protected:
     /** \brief Standard constructor
      *
      * Initializes user as a member of the groups "world" and \a group. */
-    SettingsUser(const std::string& group);
-    SettingsUser(const SettingsUser&);
+    settings_user(const std::string& group);
+    settings_user(const settings_user&);
   public:
     /** \brief Destructor */
-    virtual ~SettingsUser() {}
+    virtual ~settings_user() {}
   private:
     std::set<std::string> groups;
 
@@ -47,9 +47,9 @@ class SettingsUser {
     /** \brief Clears all groups of which this user is a member */
     inline void clearGroups() { groups.clear(); }
     /** \return true iff this user has permission to read \a node */
-    bool hasReadPermissionFor(const Node* node) const;
+    bool hasReadPermissionFor(const node* node) const;
     /** \return true iff this user has permission to write \a node */
-    bool hasWritePermissionFor(const Node* node) const;
+    bool hasWritePermissionFor(const node* node) const;
 };
 
 }

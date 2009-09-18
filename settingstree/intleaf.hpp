@@ -8,19 +8,19 @@ namespace settingstree {
 /* This defines a leaf storing a value of type T, which is assumed to be an
  * integer type */
 template <typename T>
-class IntLeaf : public Leaf {
+class int_leaf : public leaf {
   SAKUSEN_STATIC_ASSERT((boost::is_integral<T>::value));
   SAKUSEN_STATIC_ASSERT((!boost::is_same<T, bool>::value));
   public:
-    IntLeaf(
+    int_leaf(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*,
         T value = 0
       );
-    virtual ~IntLeaf() {}
+    virtual ~int_leaf() {}
   private:
     T value;
   protected:

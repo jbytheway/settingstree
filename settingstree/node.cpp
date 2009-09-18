@@ -10,11 +10,11 @@
 
 namespace settingstree {
 
-Node::Node(
+node::node(
     const std::string& n,
     const std::string& readers,
     const std::string& writers,
-    Branch* p,
+    branch* p,
     settings_callback* callback
   ) :
   callback_(callback),
@@ -50,14 +50,14 @@ Node::Node(
   }
 }
 
-std::string Node::getFullName() const
+std::string node::getFullName() const
 {
   std::ostringstream nameStream;
   streamFullName(nameStream);
   return nameStream.str();
 }
 
-void Node::appendFullNameAsList(std::list<std::string>& fullName) const
+void node::appendFullNameAsList(std::list<std::string>& fullName) const
 {
   if (parent != NULL) {
     parent->appendFullNameAsList(fullName);
@@ -67,14 +67,14 @@ void Node::appendFullNameAsList(std::list<std::string>& fullName) const
   }
 }
 
-std::list<std::string> Node::getFullNameAsList() const
+std::list<std::string> node::getFullNameAsList() const
 {
   std::list<std::string> fullName;
   appendFullNameAsList(fullName);
   return fullName;
 }
 
-void Node::streamFullName(std::ostream& nameStream) const
+void node::streamFullName(std::ostream& nameStream) const
 {
   if (parent != NULL) {
     parent->streamFullName(nameStream);

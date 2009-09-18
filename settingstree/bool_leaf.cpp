@@ -2,20 +2,20 @@
 
 namespace settingstree {
 
-BoolLeaf::BoolLeaf(
+bool_leaf::bool_leaf(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
-    Branch* parent,
+    branch* parent,
     settings_callback* callback,
     bool v
   ) :
-  Leaf(name, readers, writers, parent, callback),
+  leaf(name, readers, writers, parent, callback),
   value(v)
 {
 }
 
-std::string BoolLeaf::setValue(const std::string& v)
+std::string bool_leaf::setValue(const std::string& v)
 {
   if (v == "true" || v == "1" || v == "on") {
     if (value) {
@@ -47,7 +47,7 @@ std::string BoolLeaf::setValue(const std::string& v)
   return "invalid value for boolean leaf";
 }
 
-std::set<std::string> BoolLeaf::getValue() const
+std::set<std::string> bool_leaf::getValue() const
 {
   std::set<std::string> result;
   if (value) {

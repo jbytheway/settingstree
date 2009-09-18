@@ -14,16 +14,16 @@
 
 namespace settingstree {
 
-class Branch;
+class branch;
 
-class Node :
-  public boost::enable_shared_from_this<Node>,
+class node :
+  public boost::enable_shared_from_this<node>,
   private boost::noncopyable {
   public:
-    typedef boost::shared_ptr<Node> Ptr;
-    typedef boost::shared_ptr<const Node> ConstPtr;
+    typedef boost::shared_ptr<node> Ptr;
+    typedef boost::shared_ptr<const node> ConstPtr;
 
-    virtual ~Node() = 0;
+    virtual ~node() = 0;
 
     inline const std::string& getName() const { return name; }
     virtual bool isLeaf() const = 0;
@@ -33,10 +33,10 @@ class Node :
     inline const std::set<std::string>& getWritingGroups() const {
       return writingGroups;
     }
-    virtual Node* getNodeByListRef(
+    virtual node* getNodeByListRef(
         std::list<std::string>& nodeAddress
       ) = 0; /* Note: alters its argument nodeAddress */
-    inline Node* getNodeByList(
+    inline node* getNodeByList(
         std::list<std::string> nodeAddress
       ) { return getNodeByListRef(nodeAddress); }
     virtual void streamFullName(std::ostream& nameStream) const;
@@ -46,36 +46,36 @@ class Node :
     virtual std::string changeRequestListRef(
         std::list<std::string>& nodeAddress,
         const std::string& value,
-        const SettingsUser* user
+        const settings_user* user
       ) = 0; /* Note: alters its argument nodeAddress */
     inline std::string changeRequestList(
         std::list<std::string> nodeAddress,
         const std::string& value,
-        const SettingsUser* user
+        const settings_user* user
       ) { return changeRequestListRef(nodeAddress, value, user); }
-    virtual boost::tuple<std::string, std::set<std::string>, Node const*>
+    virtual boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
-        const SettingsUser* user
+        const settings_user* user
       ) const = 0; /* Note: alters its argument nodeAddress */
-    inline boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
+    inline boost::tuple<std::string, std::set<std::string>, node::ConstPtr>
       getRequestList(
         std::list<std::string> nodeAddress,
-        const SettingsUser* user
+        const settings_user* user
       ) const { return getRequestListRef(nodeAddress, user); }
   protected:
-    Node(
+    node(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*
       ); /* both readers and writers are interpreted as a comma-seperated list
             of group names.  'server' is added automatically to both lists */
     settings_callback* callback_;
   private:
     std::string name;
-    Branch* parent;
+    branch* parent;
       /* node above this in the tree (NULL if this is the root node).
        * Not owned by this. */
     std::set<std::string> readingGroups; /* Groups with read permission */

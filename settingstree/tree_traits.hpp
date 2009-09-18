@@ -13,22 +13,22 @@ template<typename T>
 struct TreeTraits {
   /** \brief Allows determination of the correct type of leaf to use to store
    * data of type T */
-  typedef IntLeaf<T> LeafType;
+  typedef int_leaf<T> LeafType;
 };
 
 template<>
 struct TreeTraits<std::string> {
-  typedef StringLeaf LeafType;
+  typedef string_leaf LeafType;
 };
 
 template<>
 struct TreeTraits<std::set<std::string> > {
-  typedef StringSetLeaf LeafType;
+  typedef string_set_leaf LeafType;
 };
 
 template<>
 struct TreeTraits<bool> {
-  typedef BoolLeaf LeafType;
+  typedef bool_leaf LeafType;
 };
 
 }

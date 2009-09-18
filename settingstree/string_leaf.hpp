@@ -5,17 +5,17 @@
 
 namespace settingstree {
 
-class StringLeaf : public Leaf {
+class string_leaf : public leaf {
   public:
-    StringLeaf(
+    string_leaf(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*,
         const std::string& initialValue = ""
       );
-    virtual ~StringLeaf() { }
+    virtual ~string_leaf() { }
   protected:
     std::string value;
 

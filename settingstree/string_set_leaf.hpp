@@ -7,20 +7,20 @@
 
 namespace settingstree {
 
-class StringSetLeaf : public Leaf {
+class string_set_leaf : public leaf {
   public:
-    typedef boost::shared_ptr<StringSetLeaf> Ptr;
-    typedef boost::shared_ptr<const StringSetLeaf> ConstPtr;
+    typedef boost::shared_ptr<string_set_leaf> Ptr;
+    typedef boost::shared_ptr<const string_set_leaf> ConstPtr;
     
-    StringSetLeaf(
+    string_set_leaf(
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        Branch* parent,
+        branch* parent,
         settings_callback*,
         const std::set<std::string>& initialValue = std::set<std::string>()
       );
-    virtual ~StringSetLeaf() { }
+    virtual ~string_set_leaf() { }
   private:
     std::set<std::string> value;
   protected:

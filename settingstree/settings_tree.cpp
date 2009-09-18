@@ -8,12 +8,12 @@
 
 namespace settingstree {
 
-SettingsTree::SettingsTree(settings_callback* callback) :
-  Branch("", "world", "", NULL, callback)
+settings_tree::settings_tree(settings_callback* callback) :
+  branch("", "world", "", NULL, callback)
 {
 }
 
-std::list<std::string> SettingsTree::stringNodeAddressToList(
+std::list<std::string> settings_tree::stringNodeAddressToList(
     const std::string& nodeAddress
   ) const
 {
@@ -34,25 +34,25 @@ std::list<std::string> SettingsTree::stringNodeAddressToList(
   return addressAsList;
 }
 
-Node* SettingsTree::getNode(const std::string& nodeAddress)
+node* settings_tree::getNode(const std::string& nodeAddress)
 {
   return getNodeByList(stringNodeAddressToList(nodeAddress));
 }
 
-std::string SettingsTree::changeRequest(
+std::string settings_tree::changeRequest(
     const std::string& nodeAddress,
     const std::string& value,
-    const SettingsUser* user)
+    const settings_user* user)
 {
   return changeRequestList(
       stringNodeAddressToList(nodeAddress), value, user
     );
 }
 
-boost::tuple<std::string, std::set<std::string>, Node::ConstPtr>
-SettingsTree::getRequest(
+boost::tuple<std::string, std::set<std::string>, node::ConstPtr>
+settings_tree::getRequest(
     const std::string& nodeAddress,
-    const SettingsUser* user
+    const settings_user* user
   ) const
 {
   return getRequestList(stringNodeAddressToList(nodeAddress), user);

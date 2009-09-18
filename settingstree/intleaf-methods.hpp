@@ -6,21 +6,21 @@
 namespace settingstree {
 
 template<typename T>
-IntLeaf<T>::IntLeaf(
+int_leaf<T>::int_leaf(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
-    Branch* parent,
+    branch* parent,
     settings_callback*,
     T v
   ) :
-  Leaf(name, readers, writers, parent, server),
+  leaf(name, readers, writers, parent, server),
   value(v)
 {
 }  
 
 template<typename T>
-std::string IntLeaf<T>::setValue(const std::string& s)
+std::string int_leaf<T>::setValue(const std::string& s)
 {
   T v = sakusen::numFromString<T>(s);
   if (v == value) {
@@ -36,7 +36,7 @@ std::string IntLeaf<T>::setValue(const std::string& s)
 }
 
 template<typename T>
-std::set<std::string> IntLeaf<T>::getValue() const
+std::set<std::string> int_leaf<T>::getValue() const
 {
   std::set<std::string> result;
   result.insert(sakusen::numToString(value));
