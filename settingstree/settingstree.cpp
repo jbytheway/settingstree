@@ -1,25 +1,29 @@
 #include <settingstree/settingstree.hpp>
 
+#include <boost/algorithm/string/split.hpp>
+#include <boost/spirit/home/phoenix/operator/comparison.hpp>
+#include <boost/spirit/home/phoenix/core/argument.hpp>
+
+#include <settingstree/delimiter.hpp>
+
 namespace settingsTree {
 
 SettingsTree::SettingsTree(settings_callback* callback) :
-  Branch("", "world", "", NULL, server)
+  Branch("", "world", "", NULL, callback)
 {
-  addChild(Node::Ptr(new ServerBranch(this, server)));
-  addChild(Node::Ptr(new GameBranch(this, server)));
-  addChild(Node::Ptr(new ClientsBranch(this, server)));
-  addChild(Node::Ptr(new PlayersBranch(this, server)));
-  addChild(Node::Ptr(new PluginsBranch(this, server)));
 }
 
-list<std::string> SettingsTree::stringNodeAddressToList(
+std::list<std::string> SettingsTree::stringNodeAddressToList(
     const std::string& nodeAddress
   ) const
 {
-  list<std::string> addressAsList =
-    stringUtils_split<list<std::string> >(nodeAddress, SETTINGS_DELIMITER);
+  std::list<std::string> addressAsList;
+  boost::algorithm::split(
+      addressAsList, nodeAddress,
+      boost::phoenix::arg_names::arg1 == SETTINGSTREE_DELIMITER
+    );
   /* Remove effect of leading, trailing or duplicate delimiters */
-  list<std::string>::iterator name = addressAsList.begin();
+  std::list<std::string>::iterator name = addressAsList.begin();
   while (name != addressAsList.end()) {
     if (name->empty()) {
       name = addressAsList.erase(name);
@@ -30,7 +34,7 @@ list<std::string> SettingsTree::stringNodeAddressToList(
   return addressAsList;
 }
 
-Node::Ptr SettingsTree::getNode(const std::string& nodeAddress)
+Node* SettingsTree::getNode(const std::string& nodeAddress)
 {
   return getNodeByList(stringNodeAddressToList(nodeAddress));
 }

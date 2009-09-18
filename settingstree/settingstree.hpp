@@ -25,7 +25,7 @@ class SettingsTree : public Branch {
         const std::string& nodeAddress,
         const SettingsUser* user
       ) const;
-    Node::Ptr getNode(const std::string& nodeAddress);
+    Node* getNode(const std::string& nodeAddress);
 };
 
 }
