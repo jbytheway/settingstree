@@ -9,7 +9,7 @@
 #include <boost/utility.hpp>
 #include <boost/tuple/tuple.hpp>
 
-#include <settingstree/settingsuser.hpp>
+#include <settingstree/settings_user.hpp>
 #include <settingstree/settings_callback.hpp>
 
 namespace settingsTree {

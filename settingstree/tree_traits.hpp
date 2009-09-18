@@ -2,9 +2,9 @@
 #define SETTINGSTREE__TREETRAITS_H
 
 #include <settingstree/intleaf.hpp>
-#include <settingstree/stringleaf.hpp>
+#include <settingstree/string_leaf.hpp>
 #include <settingstree/stringsetleaf.hpp>
-#include <settingstree/boolleaf.hpp>
+#include <settingstree/bool_leaf.hpp>
 
 namespace settingsTree {
 

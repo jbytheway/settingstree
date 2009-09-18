@@ -4,7 +4,7 @@
 #include <list>
 
 #include <settingstree/branch.hpp>
-#include <settingstree/settingsuser.hpp>
+#include <settingstree/settings_user.hpp>
 
 namespace settingsTree {
 

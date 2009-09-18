@@ -1,4 +1,4 @@
-#include <settingstree/settingstree.hpp>
+#include <settingstree/settings_tree.hpp>
 
 #include <boost/algorithm/string/split.hpp>
 #include <boost/spirit/home/phoenix/operator/comparison.hpp>

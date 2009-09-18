@@ -1,4 +1,4 @@
-#include <settingstree/settingsuser.hpp>
+#include <settingstree/settings_user.hpp>
 
 #include <settingstree/node.hpp>
 

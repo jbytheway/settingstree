@@ -1,4 +1,4 @@
-#include <settingstree/boolleaf.hpp>
+#include <settingstree/bool_leaf.hpp>
 
 namespace settingsTree {
 
