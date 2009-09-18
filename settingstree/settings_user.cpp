@@ -2,7 +2,7 @@
 
 #include <settingstree/node.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 SettingsUser::SettingsUser(const std::string& group) :
   groups()

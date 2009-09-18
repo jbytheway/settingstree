@@ -3,7 +3,7 @@
 
 #include <settingstree/intleaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 template<typename T>
 IntLeaf<T>::IntLeaf(

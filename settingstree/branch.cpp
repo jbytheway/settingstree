@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-namespace settingsTree {
+namespace settingstree {
 
 Branch::Branch(
     const std::string& name,

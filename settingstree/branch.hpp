@@ -7,7 +7,7 @@
 
 #include <settingstree/node.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class Branch : public Node {
   public:

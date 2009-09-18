@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace settingsTree {
+namespace settingstree {
 
 class Leaf;
 class Node;

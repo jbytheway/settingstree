@@ -5,7 +5,7 @@
 
 #include <settingstree/leaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class StringSetLeaf : public Leaf {
   public:

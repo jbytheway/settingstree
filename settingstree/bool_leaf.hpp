@@ -3,7 +3,7 @@
 
 #include <settingstree/leaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class BoolLeaf : public Leaf {
   public:

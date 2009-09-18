@@ -6,7 +6,7 @@
 #include <settingstree/stringsetleaf.hpp>
 #include <settingstree/bool_leaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 /** \brief Traits class for helping with settings tree generic programming */
 template<typename T>

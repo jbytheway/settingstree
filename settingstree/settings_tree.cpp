@@ -6,7 +6,7 @@
 
 #include <settingstree/delimiter.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 SettingsTree::SettingsTree(settings_callback* callback) :
   Branch("", "world", "", NULL, callback)

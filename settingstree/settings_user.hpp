@@ -5,7 +5,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class Node;
 
@@ -47,13 +47,9 @@ class SettingsUser {
     /** \brief Clears all groups of which this user is a member */
     inline void clearGroups() { groups.clear(); }
     /** \return true iff this user has permission to read \a node */
-    bool hasReadPermissionFor(
-        const settingsTree::Node* node
-      ) const;
+    bool hasReadPermissionFor(const Node* node) const;
     /** \return true iff this user has permission to write \a node */
-    bool hasWritePermissionFor(
-        const settingsTree::Node* node
-      ) const;
+    bool hasWritePermissionFor(const Node* node) const;
 };
 
 }

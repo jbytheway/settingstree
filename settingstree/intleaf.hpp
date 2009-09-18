@@ -3,7 +3,7 @@
 
 #include <settingstree/leaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 /* This defines a leaf storing a value of type T, which is assumed to be an
  * integer type */

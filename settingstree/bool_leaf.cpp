@@ -1,6 +1,6 @@
 #include <settingstree/bool_leaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 BoolLeaf::BoolLeaf(
     const std::string& name,

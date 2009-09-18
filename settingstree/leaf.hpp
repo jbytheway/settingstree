@@ -4,7 +4,7 @@
 #include <settingstree/node.hpp>
 #include <settingstree/branch.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class Leaf : public Node {
   public:

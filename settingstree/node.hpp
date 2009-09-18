@@ -12,7 +12,7 @@
 #include <settingstree/settings_user.hpp>
 #include <settingstree/settings_callback.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class Branch;
 

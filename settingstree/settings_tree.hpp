@@ -6,7 +6,7 @@
 #include <settingstree/branch.hpp>
 #include <settingstree/settings_user.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 class SettingsTree : public Branch {
   public:

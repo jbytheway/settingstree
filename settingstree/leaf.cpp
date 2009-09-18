@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-namespace settingsTree {
+namespace settingstree {
 
 Leaf::Leaf(
     const std::string& name,

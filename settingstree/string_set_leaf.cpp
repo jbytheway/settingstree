@@ -1,6 +1,6 @@
 #include <settingstree/string_set_leaf.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 StringSetLeaf::StringSetLeaf(
     const std::string& name,

@@ -8,7 +8,7 @@
 #include <settingstree/branch.hpp>
 #include <settingstree/delimiter.hpp>
 
-namespace settingsTree {
+namespace settingstree {
 
 Node::Node(
     const std::string& n,
