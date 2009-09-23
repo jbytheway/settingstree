@@ -13,9 +13,7 @@ class settings_tree : public branch {
     typedef boost::shared_ptr<settings_tree> Ptr;
 
     settings_tree(settings_callback*);
-  private:
-    std::list<std::string> stringNodeAddressToList(const std::string& nodeAddress) const;
-  public:
+
     std::string changeRequest(
         const std::string& node,
         const std::string& value,
@@ -26,6 +24,8 @@ class settings_tree : public branch {
         const settings_user* user
       ) const;
     node* getNode(const std::string& nodeAddress);
+  private:
+    std::list<std::string> stringNodeAddressToList(const std::string& nodeAddress) const;
 };
 
 }
