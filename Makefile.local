@@ -1,2 +1,4 @@
-SUBDIRS := settingstree
+SUBDIRS := settingstree test
+
+all-recurse-test: all-recurse-settingstree
 

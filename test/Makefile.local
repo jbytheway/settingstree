@@ -1,0 +1,5 @@
+BIN := settingstree-test
+
+test-nonrecursive: $(BIN)
+	./$(BIN)
+
