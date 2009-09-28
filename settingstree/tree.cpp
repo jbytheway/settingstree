@@ -1,4 +1,4 @@
-#include <settingstree/settings_tree.hpp>
+#include <settingstree/tree.hpp>
 
 #include <boost/algorithm/string/split.hpp>
 #include <boost/spirit/home/phoenix/operator/comparison.hpp>
@@ -8,12 +8,12 @@
 
 namespace settingstree {
 
-settings_tree::settings_tree(branch_callback& callback) :
+tree::tree(branch_callback& callback) :
   branch("", "world", "", NULL, callback)
 {
 }
 
-std::list<std::string> settings_tree::stringNodeAddressToList(
+std::list<std::string> tree::stringNodeAddressToList(
     const std::string& nodeAddress
   ) const
 {
@@ -34,12 +34,12 @@ std::list<std::string> settings_tree::stringNodeAddressToList(
   return addressAsList;
 }
 
-node* settings_tree::getNode(const std::string& nodeAddress)
+node* tree::getNode(const std::string& nodeAddress)
 {
   return getNodeByList(stringNodeAddressToList(nodeAddress));
 }
 
-std::string settings_tree::changeRequest(
+std::string tree::changeRequest(
     const std::string& nodeAddress,
     const std::string& value,
     const settings_user* user)
@@ -50,7 +50,7 @@ std::string settings_tree::changeRequest(
 }
 
 boost::tuple<std::string, std::set<std::string>, node::ConstPtr>
-settings_tree::getRequest(
+tree::getRequest(
     const std::string& nodeAddress,
     const settings_user* user
   ) const

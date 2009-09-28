@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <settingstree/settings_tree.hpp>
+#include <settingstree/tree.hpp>
 #include <settingstree/make.hpp>
 
 namespace st = settingstree;

@@ -1,5 +1,5 @@
-#ifndef SETTINGSTREE_H
-#define SETTINGSTREE_H
+#ifndef SETTINGSTREE__TREE_H
+#define SETTINGSTREE__TREE_H
 
 #include <list>
 
@@ -8,11 +8,11 @@
 
 namespace settingstree {
 
-class settings_tree : public branch {
+class tree : public branch {
   public:
-    typedef boost::shared_ptr<settings_tree> Ptr;
+    typedef boost::shared_ptr<tree> Ptr;
 
-    settings_tree(branch_callback&);
+    tree(branch_callback&);
 
     std::string changeRequest(
         const std::string& node,
@@ -25,10 +25,11 @@ class settings_tree : public branch {
       ) const;
     node* getNode(const std::string& nodeAddress);
   private:
-    std::list<std::string> stringNodeAddressToList(const std::string& nodeAddress) const;
+    std::list<std::string>
+      stringNodeAddressToList(const std::string& nodeAddress) const;
 };
 
 }
 
-#endif // SETTINGSTREE_H
+#endif // SETTINGSTREE__TREE_H
 
