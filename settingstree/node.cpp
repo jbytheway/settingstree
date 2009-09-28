@@ -10,21 +10,22 @@
 
 namespace settingstree {
 
+node::~node()
+{
+}
+
 node::node(
     const std::string& n,
     const std::string& readers,
     const std::string& writers,
-    branch* p,
-    settings_callback* callback
+    branch* p
   ) :
-  callback_(callback),
   name(n),
   parent(p),
   readingGroups(),
   writingGroups()
 {
   assert((p == NULL) == n.empty());
-  assert(callback != NULL);
 
   readingGroups.insert("server");
   writingGroups.insert("server");

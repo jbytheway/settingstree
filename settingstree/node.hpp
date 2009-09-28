@@ -10,7 +10,7 @@
 #include <boost/tuple/tuple.hpp>
 
 #include <settingstree/settings_user.hpp>
-#include <settingstree/settings_callback.hpp>
+#include <settingstree/leaf_callback.hpp>
 
 namespace settingstree {
 
@@ -68,11 +68,9 @@ class node :
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        branch* parent,
-        settings_callback*
+        branch* parent
       ); /* both readers and writers are interpreted as a comma-seperated list
             of group names.  'server' is added automatically to both lists */
-    settings_callback* callback_;
   private:
     std::string name;
     branch* parent;

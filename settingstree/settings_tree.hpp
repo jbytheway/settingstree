@@ -12,7 +12,7 @@ class settings_tree : public branch {
   public:
     typedef boost::shared_ptr<settings_tree> Ptr;
 
-    settings_tree(settings_callback*);
+    settings_tree(branch_callback&);
 
     std::string changeRequest(
         const std::string& node,

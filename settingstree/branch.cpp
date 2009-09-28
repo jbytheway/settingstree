@@ -9,22 +9,23 @@ branch::branch(
     const std::string& readers,
     const std::string& writers,
     branch* parent,
-    settings_callback* callback
+    branch_callback& callback
   ) :
-  node(name, readers, writers, parent, callback)
+  node(name, readers, writers, parent),
+  callback_(callback)
 {
 }
 
 node::Ptr branch::addChild(node::Ptr child) {
   children[child->getName()] = child;
-  callback_->settingAlteredCallback(this);
+  callback_.childrenAlteredCallback(this);
   return child;
 }
 
 void branch::removeChild(std::string name) {
   assert(children.count(name));
   children.erase(name);
-  callback_->settingAlteredCallback(this);
+  callback_.childrenAlteredCallback(this);
 }
 
 node* branch::getNodeByListRef(

@@ -8,10 +8,9 @@ leaf::leaf(
     const std::string& name,
     const std::string& readers,
     const std::string& writers,
-    branch* parent,
-    settings_callback* callback
+    branch* parent
   ) :
-  node(name, readers, writers, parent, callback)
+  node(name, readers, writers, parent)
 {
 }
 
@@ -54,7 +53,7 @@ std::string leaf::changeRequestListRef(
   std::string reason = setValue(value);
 
   if (reason == "") {
-    callback_->settingAlteredCallback(this);
+    callback().settingAlteredCallback(this);
   }
 
   return reason;

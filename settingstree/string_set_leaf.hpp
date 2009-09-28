@@ -17,12 +17,13 @@ class string_set_leaf : public leaf {
         const std::string& readers,
         const std::string& writers,
         branch* parent,
-        settings_callback*,
+        leaf_callback<std::set<std::string> >&,
         const std::set<std::string>& initialValue = std::set<std::string>()
       );
     virtual ~string_set_leaf() { }
   private:
     std::set<std::string> value;
+    leaf_callback<std::set<std::string> >& callback_;
   protected:
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;

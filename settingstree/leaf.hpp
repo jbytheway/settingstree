@@ -3,6 +3,7 @@
 
 #include <settingstree/node.hpp>
 #include <settingstree/branch.hpp>
+#include <settingstree/leaf_callback.hpp>
 
 namespace settingstree {
 
@@ -14,11 +15,10 @@ class leaf : public node {
         const std::string& name,
         const std::string& readers,
         const std::string& writers,
-        branch* parent,
-        settings_callback*
+        branch* parent
       );
-    virtual ~leaf();
   protected:
+    virtual ~leaf() = 0;
     virtual node* getNodeByListRef(
         std::list<std::string>& nodeAddress
       );
@@ -33,6 +33,7 @@ class leaf : public node {
         const settings_user* client
       ) const;
     virtual std::string setValue(const std::string& v) = 0;
+    virtual detail::generic_leaf_callback& callback() = 0;
   public:
     bool isLeaf() const { return true; }
     virtual std::set<std::string> getValue() const = 0;

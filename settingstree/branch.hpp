@@ -6,6 +6,7 @@
 #include <boost/unordered_map.hpp>
 
 #include <settingstree/node.hpp>
+#include <settingstree/branch_callback.hpp>
 
 namespace settingstree {
 
@@ -19,11 +20,11 @@ class branch : public node {
         const std::string& readers,
         const std::string& writers,
         branch* parent,
-        settings_callback*
+        branch_callback&
       );
   private:
     boost::unordered_map<std::string, node::Ptr> children;
-
+    branch_callback& callback_;
   protected:
     node::Ptr addChild(node::Ptr child);
     void removeChild(std::string name);

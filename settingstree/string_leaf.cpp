@@ -7,18 +7,19 @@ string_leaf::string_leaf(
     const std::string& readers,
     const std::string& writers,
     branch* parent,
-    settings_callback* callback,
+    leaf_callback<std::string>& callback,
     const std::string& initialValue
   ) :
-  leaf(name, readers, writers, parent, callback),
-  value(initialValue)
+  leaf(name, readers, writers, parent),
+  value(initialValue),
+  callback_(callback)
 {
 }
 
 std::string string_leaf::setValue(const std::string& v)
 {
   std::string reason;
-  if ("" != (reason = callback_->settingAlteringCallback(this, v))) {
+  if ("" != (reason = callback_.settingAlteringCallback(this, v))) {
     return reason;
   }
   value = v;

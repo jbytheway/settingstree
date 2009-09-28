@@ -7,11 +7,12 @@ bool_leaf::bool_leaf(
     const std::string& readers,
     const std::string& writers,
     branch* parent,
-    settings_callback* callback,
+    leaf_callback<bool>& callback,
     bool v
   ) :
-  leaf(name, readers, writers, parent, callback),
-  value(v)
+  leaf(name, readers, writers, parent),
+  value(v),
+  callback_(callback)
 {
 }
 
@@ -23,7 +24,7 @@ std::string bool_leaf::setValue(const std::string& v)
     } else {
       std::string reason;
       if ("" !=
-          (reason = callback_->settingAlteringCallback<bool>(this, true))) {
+          (reason = callback_.settingAlteringCallback(this, true))) {
         return reason;
       }
       
@@ -36,7 +37,7 @@ std::string bool_leaf::setValue(const std::string& v)
     } else {
       std::string reason;
       if ("" !=
-          (reason = callback_->settingAlteringCallback<bool>(this, false))) {
+          (reason = callback_.settingAlteringCallback(this, false))) {
         return reason;
       }
       

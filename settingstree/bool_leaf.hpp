@@ -12,15 +12,17 @@ class bool_leaf : public leaf {
         const std::string& readers,
         const std::string& writers,
         branch* parent,
-        settings_callback*,
+        leaf_callback<bool>&,
         bool value = false
       );
     virtual ~bool_leaf() {}
   private:
     bool value;
+    leaf_callback<bool>& callback_;
   protected:
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;
+    virtual leaf_callback<bool>& callback() { return callback_; }
   public:
     inline bool getValueAsBool() const { return value; }
 };

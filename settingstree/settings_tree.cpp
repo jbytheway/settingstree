@@ -8,7 +8,7 @@
 
 namespace settingstree {
 
-settings_tree::settings_tree(settings_callback* callback) :
+settings_tree::settings_tree(branch_callback& callback) :
   branch("", "world", "", NULL, callback)
 {
 }
