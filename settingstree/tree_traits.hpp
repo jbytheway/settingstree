@@ -10,25 +10,25 @@ namespace settingstree {
 
 /** \brief Traits class for helping with settings tree generic programming */
 template<typename T>
-struct TreeTraits {
+struct tree_traits {
   /** \brief Allows determination of the correct type of leaf to use to store
    * data of type T */
-  typedef int_leaf<T> LeafType;
+  typedef int_leaf<T> leaf_type;
 };
 
 template<>
-struct TreeTraits<std::string> {
-  typedef string_leaf LeafType;
+struct tree_traits<std::string> {
+  typedef string_leaf leaf_type;
 };
 
 template<>
-struct TreeTraits<std::set<std::string> > {
-  typedef string_set_leaf LeafType;
+struct tree_traits<std::set<std::string> > {
+  typedef string_set_leaf leaf_type;
 };
 
 template<>
-struct TreeTraits<bool> {
-  typedef bool_leaf LeafType;
+struct tree_traits<bool> {
+  typedef bool_leaf leaf_type;
 };
 
 }

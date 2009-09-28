@@ -45,7 +45,7 @@ struct leaf_template {
   T value_;
 
   node::Ptr node_ptr(branch& parent) {
-    typedef typename TreeTraits<T>::LeafType leaf_type;
+    typedef typename tree_traits<T>::leaf_type leaf_type;
     node::Ptr result(new leaf_type(name_, "", "", &parent, callback_, value_));
     return result;
   }
