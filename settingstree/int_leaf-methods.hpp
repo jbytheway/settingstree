@@ -3,7 +3,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <settingstree/intleaf.hpp>
+#include <settingstree/int_leaf.hpp>
 
 namespace settingstree {
 

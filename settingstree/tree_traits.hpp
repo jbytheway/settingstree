@@ -1,7 +1,7 @@
 #ifndef SETTINGSTREE__TREETRAITS_H
 #define SETTINGSTREE__TREETRAITS_H
 
-#include <settingstree/intleaf.hpp>
+#include <settingstree/int_leaf.hpp>
 #include <settingstree/string_leaf.hpp>
 #include <settingstree/string_set_leaf.hpp>
 #include <settingstree/bool_leaf.hpp>

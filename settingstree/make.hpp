@@ -8,7 +8,7 @@
 #include <settingstree/branch.hpp>
 #include <settingstree/tree.hpp>
 #include <settingstree/tree_traits.hpp>
-#include <settingstree/intleaf-methods.hpp>
+#include <settingstree/int_leaf-methods.hpp>
 
 namespace settingstree {
 
