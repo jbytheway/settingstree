@@ -1,4 +1,5 @@
 BIN := settingstree-test
+LIB_DEP_NAMES := settingstree
 
 test-nonrecursive: $(BIN)
 	./$(BIN)
