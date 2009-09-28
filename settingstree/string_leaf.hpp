@@ -1,5 +1,5 @@
-#ifndef SETTINGSTREE__STRINGLEAF_HPP
-#define SETTINGSTREE__STRINGLEAF_HPP
+#ifndef SETTINGSTREE__STRING_LEAF_HPP
+#define SETTINGSTREE__STRING_LEAF_HPP
 
 #include <settingstree/leaf.hpp>
 
@@ -27,5 +27,5 @@ class string_leaf : public leaf {
 
 }
 
-#endif // SETTINGSTREE__STRINGLEAF_HPP
+#endif // SETTINGSTREE__STRING_LEAF_HPP
 

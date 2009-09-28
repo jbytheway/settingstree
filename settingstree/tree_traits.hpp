@@ -1,5 +1,5 @@
-#ifndef SETTINGSTREE__TREETRAITS_H
-#define SETTINGSTREE__TREETRAITS_H
+#ifndef SETTINGSTREE__TREE_TRAITS_H
+#define SETTINGSTREE__TREE_TRAITS_H
 
 #include <settingstree/int_leaf.hpp>
 #include <settingstree/string_leaf.hpp>
@@ -33,5 +33,5 @@ struct tree_traits<bool> {
 
 }
 
-#endif // SETTINGSTREE__TREETRAITS_H
+#endif // SETTINGSTREE__TREE_TRAITS_H
 

@@ -1,5 +1,5 @@
-#ifndef SETTINGSTREE__INTLEAF_METHODS_HPP
-#define SETTINGSTREE__INTLEAF_METHODS_HPP
+#ifndef SETTINGSTREE__INT_LEAF_METHODS_HPP
+#define SETTINGSTREE__INT_LEAF_METHODS_HPP
 
 #include <boost/lexical_cast.hpp>
 
@@ -48,5 +48,5 @@ std::set<std::string> int_leaf<T>::getValue() const
 
 }
 
-#endif // SETTINGSTREE__INTLEAF_METHODS_HPP
+#endif // SETTINGSTREE__INT_LEAF_METHODS_HPP
 

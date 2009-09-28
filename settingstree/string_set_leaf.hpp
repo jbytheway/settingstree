@@ -1,5 +1,5 @@
-#ifndef SETTINGSTREE__STRINGSETLEAF_HPP
-#define SETTINGSTREE__STRINGSETLEAF_HPP
+#ifndef SETTINGSTREE__STRING_SET_LEAF_HPP
+#define SETTINGSTREE__STRING_SET_LEAF_HPP
 
 #include <set>
 
@@ -35,5 +35,5 @@ class string_set_leaf : public leaf {
 
 }
 
-#endif // SETTINGSTREE__STRINGSETLEAF_HPP
+#endif // SETTINGSTREE__STRING_SET_LEAF_HPP
 

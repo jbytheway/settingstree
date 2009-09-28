@@ -1,5 +1,5 @@
-#ifndef SETTINGSTREE__BOOLLEAF_HPP
-#define SETTINGSTREE__BOOLLEAF_HPP
+#ifndef SETTINGSTREE__BOOL_LEAF_HPP
+#define SETTINGSTREE__BOOL_LEAF_HPP
 
 #include <settingstree/leaf.hpp>
 
@@ -29,5 +29,5 @@ class bool_leaf : public leaf {
 
 }
 
-#endif // SETTINGSTREE__BOOLLEAF_HPP
+#endif // SETTINGSTREE__BOOL_LEAF_HPP
 
