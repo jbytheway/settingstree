@@ -22,6 +22,7 @@ class string_leaf : public leaf {
 
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;
+    virtual leaf_callback<std::string>& callback() { return callback_; }
 };
 
 }

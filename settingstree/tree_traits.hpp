@@ -3,7 +3,7 @@
 
 #include <settingstree/intleaf.hpp>
 #include <settingstree/string_leaf.hpp>
-#include <settingstree/stringsetleaf.hpp>
+#include <settingstree/string_set_leaf.hpp>
 #include <settingstree/bool_leaf.hpp>
 
 namespace settingstree {

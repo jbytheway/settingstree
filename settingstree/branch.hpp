@@ -14,7 +14,7 @@ class branch : public node {
   public:
     typedef boost::shared_ptr<branch> Ptr;
     typedef boost::shared_ptr<const branch> ConstPtr;
-  protected:
+
     branch(
         const std::string& name,
         const std::string& readers,
@@ -26,8 +26,6 @@ class branch : public node {
     boost::unordered_map<std::string, node::Ptr> children;
     branch_callback& callback_;
   protected:
-    node::Ptr addChild(node::Ptr child);
-    void removeChild(std::string name);
     virtual node* getNodeByListRef(std::list<std::string>& nodeAddress);
     virtual std::string changeRequestListRef(
         std::list<std::string>& setting,
@@ -40,6 +38,8 @@ class branch : public node {
         const settings_user* user
       ) const;
   public:
+    node::Ptr addChild(node::Ptr child);
+    void removeChild(std::string name);
     bool isLeaf() const { return false; }
     std::set<std::string> getChildNames() const;
     /* Returns node::Ptr() if no such child */

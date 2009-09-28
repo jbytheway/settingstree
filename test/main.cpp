@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 #include <settingstree/tree.hpp>
 #include <settingstree/make.hpp>
@@ -38,13 +39,14 @@ int main()
   test_callback c;
   test_branch_callback bc;
 
-  st::make("", bc,
+  st::tree::Ptr tree =
+    st::make("", bc,
       st::make("var_bool", static_cast<st::leaf_callback<bool>&>(c), true),
       st::make("subtree", bc,
         st::make("var_int", static_cast<st::leaf_callback<int>&>(c), 0),
         st::make("var_string", c, "flibble")
       )
-    );
+    ).tree_ptr();
   return 0;
 }
 

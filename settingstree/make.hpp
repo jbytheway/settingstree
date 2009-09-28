@@ -2,9 +2,13 @@
 #define SETTINGSTREE__MAKE_HPP
 
 #include <boost/fusion/include/vector.hpp>
+#include <boost/fusion/include/for_each.hpp>
 
 #include <settingstree/leaf.hpp>
 #include <settingstree/branch.hpp>
+#include <settingstree/tree.hpp>
+#include <settingstree/tree_traits.hpp>
+#include <settingstree/intleaf-methods.hpp>
 
 namespace settingstree {
 
@@ -39,6 +43,12 @@ struct leaf_template {
   std::string name_;
   leaf_callback<T>& callback_;
   T value_;
+
+  node::Ptr node_ptr(branch& parent) {
+    typedef typename TreeTraits<T>::LeafType leaf_type;
+    node::Ptr result(new leaf_type(name_, "", "", &parent, callback_, value_));
+    return result;
+  }
 };
 
 template<typename... Children>
@@ -56,6 +66,29 @@ struct branch_template {
   std::string name_;
   branch_callback& callback_;
   typename variadic_vector<Children...>::type children_;
+
+  struct add_to_branch {
+    add_to_branch(branch& b) : branch_(b) {}
+    branch& branch_;
+    template<typename ChildTemplate>
+    void operator()(ChildTemplate& child) const {
+      branch_.addChild(child.node_ptr(branch_));
+    }
+  };
+
+  tree::Ptr tree_ptr() {
+    assert(name_.empty());
+    tree::Ptr result(new tree(callback_));
+    boost::fusion::for_each(children_, add_to_branch(*result));
+    return result;
+  }
+
+  node::Ptr node_ptr(branch& parent) {
+    assert(!name_.empty());
+    branch::Ptr result(new branch(name_, "", "", &parent, callback_));
+    boost::fusion::for_each(children_, add_to_branch(*result));
+    return result;
+  }
 };
 
 struct make_helper {
