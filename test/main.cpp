@@ -39,7 +39,7 @@ int main()
   test_callback c;
   test_branch_callback bc;
 
-  st::tree::Ptr tree =
+  st::tree::ptr tree =
     st::make("", bc,
       st::make("var_bool", static_cast<st::leaf_callback<bool>&>(c), true),
       st::make("subtree", bc,

@@ -9,8 +9,8 @@ namespace settingstree {
 
 class string_set_leaf : public leaf {
   public:
-    typedef boost::shared_ptr<string_set_leaf> Ptr;
-    typedef boost::shared_ptr<const string_set_leaf> ConstPtr;
+    typedef std::unique_ptr<string_set_leaf> ptr;
+    typedef std::unique_ptr<const string_set_leaf> const_ptr;
     
     string_set_leaf(
         const std::string& name,

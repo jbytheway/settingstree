@@ -10,7 +10,8 @@ namespace settingstree {
 
 class tree : public branch {
   public:
-    typedef boost::shared_ptr<tree> Ptr;
+    typedef std::unique_ptr<tree> ptr;
+    typedef std::unique_ptr<tree const> const_ptr;
 
     tree(branch_callback&);
 
@@ -19,7 +20,7 @@ class tree : public branch {
         const std::string& value,
         const settings_user* user
       );
-    boost::tuple<std::string, std::set<std::string>, node::ConstPtr> getRequest(
+    boost::tuple<std::string, std::set<std::string>, node const*> getRequest(
         const std::string& nodeAddress,
         const settings_user* user
       ) const;

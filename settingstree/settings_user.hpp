@@ -2,8 +2,8 @@
 #define SETTINGSTREE__SETTINGS_USER_HPP
 
 #include <set>
-
-#include <boost/shared_ptr.hpp>
+#include <string>
+#include <cassert>
 
 namespace settingstree {
 

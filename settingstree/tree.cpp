@@ -49,7 +49,7 @@ std::string tree::changeRequest(
     );
 }
 
-boost::tuple<std::string, std::set<std::string>, node::ConstPtr>
+boost::tuple<std::string, std::set<std::string>, node const*>
 tree::getRequest(
     const std::string& nodeAddress,
     const settings_user* user

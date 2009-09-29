@@ -3,8 +3,8 @@
 
 #include <list>
 #include <iosfwd>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/utility.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -20,8 +20,8 @@ class node :
   public boost::enable_shared_from_this<node>,
   private boost::noncopyable {
   public:
-    typedef boost::shared_ptr<node> Ptr;
-    typedef boost::shared_ptr<const node> ConstPtr;
+    typedef std::unique_ptr<node> ptr;
+    typedef std::unique_ptr<const node> const_ptr;
 
     virtual ~node() = 0;
 
@@ -58,7 +58,7 @@ class node :
         std::list<std::string>& nodeAddress,
         const settings_user* user
       ) const = 0; /* Note: alters its argument nodeAddress */
-    inline boost::tuple<std::string, std::set<std::string>, node::ConstPtr>
+    inline boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestList(
         std::list<std::string> nodeAddress,
         const settings_user* user

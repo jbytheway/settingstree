@@ -12,8 +12,8 @@ namespace settingstree {
 
 class branch : public node {
   public:
-    typedef boost::shared_ptr<branch> Ptr;
-    typedef boost::shared_ptr<const branch> ConstPtr;
+    typedef std::unique_ptr<branch> ptr;
+    typedef std::unique_ptr<const branch> const_ptr;
 
     branch(
         const std::string& name,
@@ -23,7 +23,7 @@ class branch : public node {
         branch_callback&
       );
   private:
-    boost::unordered_map<std::string, node::Ptr> children;
+    boost::unordered_map<std::string, node::ptr> children;
     branch_callback& callback_;
   protected:
     virtual node* getNodeByListRef(std::list<std::string>& nodeAddress);
@@ -38,14 +38,14 @@ class branch : public node {
         const settings_user* user
       ) const;
   public:
-    node::Ptr addChild(node::Ptr child);
+    node* addChild(node::ptr child);
     void removeChild(std::string name);
     bool isLeaf() const { return false; }
     std::set<std::string> getChildNames() const;
     /* Returns node::Ptr() if no such child */
-    node::Ptr getChild(std::string name);
+    node* getChild(std::string name);
     /* Returns node::ConstPtr() if no such child */
-    node::ConstPtr getChild(std::string name) const;
+    node const* getChild(std::string name) const;
 };
 
 }

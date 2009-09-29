@@ -44,9 +44,9 @@ struct leaf_template {
   leaf_callback<T>& callback_;
   T value_;
 
-  node::Ptr node_ptr(branch& parent) {
+  node::ptr node_ptr(branch& parent) {
     typedef typename tree_traits<T>::leaf_type leaf_type;
-    node::Ptr result(new leaf_type(name_, "", "", &parent, callback_, value_));
+    node::ptr result(new leaf_type(name_, "", "", &parent, callback_, value_));
     return result;
   }
 };
@@ -76,18 +76,18 @@ struct branch_template {
     }
   };
 
-  tree::Ptr tree_ptr() {
+  tree::ptr tree_ptr() {
     assert(name_.empty());
-    tree::Ptr result(new tree(callback_));
+    tree::ptr result(new tree(callback_));
     boost::fusion::for_each(children_, add_to_branch(*result));
     return result;
   }
 
-  node::Ptr node_ptr(branch& parent) {
+  node::ptr node_ptr(branch& parent) {
     assert(!name_.empty());
-    branch::Ptr result(new branch(name_, "", "", &parent, callback_));
+    branch::ptr result(new branch(name_, "", "", &parent, callback_));
     boost::fusion::for_each(children_, add_to_branch(*result));
-    return result;
+    return std::move(result);
   }
 };
 
