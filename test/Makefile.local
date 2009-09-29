@@ -1,5 +1,6 @@
 BIN := settingstree-test
 LIB_DEP_NAMES := settingstree
+LIBS := -lboost_unit_test_framework
 
 test-nonrecursive: $(BIN)
 	./$(BIN)
