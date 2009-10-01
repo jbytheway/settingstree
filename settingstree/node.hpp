@@ -46,22 +46,22 @@ class node :
     virtual std::string changeRequestListRef(
         std::list<std::string>& nodeAddress,
         const std::string& value,
-        const settings_user* user
+        const settings_user& user
       ) = 0; /* Note: alters its argument nodeAddress */
     inline std::string changeRequestList(
         std::list<std::string> nodeAddress,
         const std::string& value,
-        const settings_user* user
+        const settings_user& user
       ) { return changeRequestListRef(nodeAddress, value, user); }
     virtual boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
-        const settings_user* user
+        const settings_user& user
       ) const = 0; /* Note: alters its argument nodeAddress */
     inline boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestList(
         std::list<std::string> nodeAddress,
-        const settings_user* user
+        const settings_user& user
       ) const { return getRequestListRef(nodeAddress, user); }
   protected:
     node(

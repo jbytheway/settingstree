@@ -32,11 +32,11 @@ node* leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
 std::string leaf::changeRequestListRef(
     std::list<std::string>& nodeAddress,
     const std::string& value,
-    const settings_user* user)
+    const settings_user& user)
 {
   //Debug("checking permissions for node " << getFullName());
   
-  if (!user->hasReadPermissionFor(this)) {
+  if (!user.hasReadPermissionFor(this)) {
     return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }
@@ -45,7 +45,7 @@ std::string leaf::changeRequestListRef(
     return std::string("node '") + getFullName() + "' is a leaf and has no child";
   }
   
-  if (!user->hasWritePermissionFor(this)) {
+  if (!user.hasWritePermissionFor(this)) {
     return std::string("cannot write to node '") + getFullName() +
       "': permission denied";
   }
@@ -62,10 +62,10 @@ std::string leaf::changeRequestListRef(
 boost::tuple<std::string, std::set<std::string>, node const*>
 leaf::getRequestListRef(
     std::list<std::string>& nodeAddress,
-    const settings_user* user
+    const settings_user& user
   ) const
 {
-  if (!user->hasReadPermissionFor(this)) {
+  if (!user.hasReadPermissionFor(this)) {
     return std::string("cannot read node '") + getFullName() +
       "': permission denied";
   }

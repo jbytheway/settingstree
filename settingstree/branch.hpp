@@ -30,12 +30,12 @@ class branch : public node {
     virtual std::string changeRequestListRef(
         std::list<std::string>& setting,
         const std::string& value,
-        const settings_user* user
+        const settings_user& user
       );
     virtual boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
-        const settings_user* user
+        const settings_user& user
       ) const;
   public:
     node* addChild(node::ptr child);
