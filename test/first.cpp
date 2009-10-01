@@ -17,15 +17,17 @@ class test_callback :
   public st::leaf_callback<std::string>
 {
   virtual std::string setting_altering(st::bool_leaf&, bool) {
-    std::cout << "altering" << std::endl;
+    std::cout << "altering bool" << std::endl;
     return "";
   }
-  virtual std::string setting_altering(st::int_leaf<int>&, int) {
-    std::cout << "altering" << std::endl;
+  virtual std::string setting_altering(st::int_leaf<int>& l, int v) {
+    BOOST_CHECK_EQUAL(l.getValueAsInt(), 1);
+    BOOST_CHECK_EQUAL(v, 3);
+    std::cout << "altering int" << std::endl;
     return "";
   }
   virtual std::string setting_altering(st::string_leaf&, std::string) {
-    std::cout << "altering" << std::endl;
+    std::cout << "altering string" << std::endl;
     return "";
   }
   virtual void setting_altered(st::leaf&) {
@@ -53,7 +55,7 @@ BOOST_AUTO_TEST_CASE(first)
     st::make("", bc,
       st::make("var_bool", static_cast<st::leaf_callback<bool>&>(c), true),
       st::make("subtree", bc,
-        st::make("var_int", static_cast<st::leaf_callback<int>&>(c), 0),
+        st::make("var_int", static_cast<st::leaf_callback<int>&>(c), 1),
         st::make("var_string", c, "flibble")
       )
     ).tree_ptr();
