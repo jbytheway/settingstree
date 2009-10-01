@@ -37,7 +37,7 @@ std::string string_set_leaf::setValue(const std::string& v)
       {
         std::string adding = v.substr(1);
         if (newValue.count(adding)) {
-          return "std::string to be added already in list";
+          return "String to be added already in list";
         }
         newValue.insert(adding);
       }
@@ -46,7 +46,7 @@ std::string string_set_leaf::setValue(const std::string& v)
       {
         std::string erasing = v.substr(1);
         if (0 == newValue.count(erasing)) {
-          return "std::string to be removed not in list";
+          return "String to be removed not in list";
         }
         newValue.erase(erasing);
       }
