@@ -1,7 +1,11 @@
 #ifndef SETTINGSTREE__MAKE_HPP
 #define SETTINGSTREE__MAKE_HPP
 
+#include <boost/mpl/vector.hpp>
+#include <boost/mpl/push_front.hpp>
+#include <boost/fusion/include/mpl.hpp>
 #include <boost/fusion/include/vector.hpp>
+#include <boost/fusion/include/as_vector.hpp>
 #include <boost/fusion/include/for_each.hpp>
 
 #include <settingstree/leaf.hpp>
@@ -14,24 +18,30 @@ namespace settingstree {
 
 namespace detail {
 
-// Metafunction to work around the fact that fusion isn't variadic yet
-template<typename... T>
-struct variadic_vector {
-};
+// Metafunctions to work around the fact that fusion isn't variadic yet
+template<typename... Args>
+struct variadic_sequence;
 
 template<>
-struct variadic_vector<> {
-  typedef boost::fusion::vector<> type;
+struct variadic_sequence<>
+{
+  typedef boost::mpl::vector<>::type type;
 };
 
-template<typename T1>
-struct variadic_vector<T1> {
-  typedef boost::fusion::vector<T1> type;
+template<typename First, typename... More>
+struct variadic_sequence<First, More...>
+{
+  typedef typename boost::mpl::push_front<
+      typename variadic_sequence<More...>::type,
+      First
+    >::type type;
 };
 
-template<typename T1, typename T2>
-struct variadic_vector<T1, T2> {
-  typedef boost::fusion::vector<T1, T2> type;
+template<typename... Args>
+struct variadic_vector {
+  typedef typename boost::fusion::result_of::as_vector<
+      typename variadic_sequence<Args...>::type
+    >::type type;
 };
 
 template<typename T>
