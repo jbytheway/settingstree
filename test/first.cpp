@@ -63,8 +63,11 @@ BOOST_AUTO_TEST_CASE(first)
   server_user su;
 
   // Test get_node
-  st::node* bool_node = tree->get_node("var_bool");
+  st::node* b_node = tree->get_node("var_bool");
+  BOOST_CHECK(b_node);
+  st::bool_leaf* bool_node = dynamic_cast<st::bool_leaf*>(b_node);
   BOOST_CHECK(bool_node);
+  BOOST_CHECK_EQUAL(bool_node->value_bool(), true);
 
   // Test successful get_request
   std::string result;
