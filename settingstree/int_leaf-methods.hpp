@@ -30,7 +30,7 @@ std::string int_leaf<T>::setValue(const std::string& s)
     return "setting already has that value";
   }
   std::string reason;
-  if ("" != (reason = callback_.settingAlteringCallback(this, v))) {
+  if ("" != (reason = callback_.setting_altering(this, v))) {
     return reason;
   }
 

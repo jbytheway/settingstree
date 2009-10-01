@@ -19,14 +19,14 @@ branch::branch(
 node* branch::addChild(node::ptr child) {
   node* cp = child.get();
   children[child->getName()] = std::move(child);
-  callback_.childrenAlteredCallback(this);
+  callback_.children_altered(this);
   return cp;
 }
 
 void branch::removeChild(std::string name) {
   assert(children.count(name));
   children.erase(name);
-  callback_.childrenAlteredCallback(this);
+  callback_.children_altered(this);
 }
 
 node* branch::getNodeByListRef(

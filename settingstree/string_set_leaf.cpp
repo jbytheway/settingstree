@@ -58,7 +58,7 @@ std::string string_set_leaf::setValue(const std::string& v)
 
   std::string reason;
   if ("" != 
-      (reason = callback_.settingAlteringCallback(this, newValue))
+      (reason = callback_.setting_altering(this, newValue))
     ) {
     return reason;
   }

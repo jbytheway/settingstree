@@ -16,25 +16,25 @@ class test_callback :
   public st::leaf_callback<int>,
   public st::leaf_callback<std::string>
 {
-  virtual std::string settingAlteringCallback(st::leaf*, bool) {
+  virtual std::string setting_altering(st::leaf*, bool) {
     std::cout << "altering" << std::endl;
     return "";
   }
-  virtual std::string settingAlteringCallback(st::leaf*, int) {
+  virtual std::string setting_altering(st::leaf*, int) {
     std::cout << "altering" << std::endl;
     return "";
   }
-  virtual std::string settingAlteringCallback(st::leaf*, std::string) {
+  virtual std::string setting_altering(st::leaf*, std::string) {
     std::cout << "altering" << std::endl;
     return "";
   }
-  virtual void settingAlteredCallback(st::leaf*) {
+  virtual void setting_altered(st::leaf*) {
     std::cout << "altered" << std::endl;
   }
 };
 
 class test_branch_callback : public st::branch_callback {
-  virtual void childrenAlteredCallback(st::branch*) {
+  virtual void children_altered(st::branch*) {
     std::cout << "children altered" << std::endl;
   }
 };
