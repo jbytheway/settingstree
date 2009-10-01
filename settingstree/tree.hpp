@@ -15,7 +15,7 @@ class tree : public branch {
 
     tree(branch_callback&);
 
-    std::string changeRequest(
+    std::string change_request(
         const std::string& node,
         const std::string& value,
         const settings_user& user

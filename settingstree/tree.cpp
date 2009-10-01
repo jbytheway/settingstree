@@ -39,7 +39,7 @@ node* tree::get_node(const std::string& nodeAddress)
   return getNodeByList(stringNodeAddressToList(nodeAddress));
 }
 
-std::string tree::changeRequest(
+std::string tree::change_request(
     const std::string& nodeAddress,
     const std::string& value,
     const settings_user& user)
