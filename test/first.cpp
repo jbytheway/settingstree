@@ -60,9 +60,11 @@ BOOST_AUTO_TEST_CASE(first)
 
   server_user su;
 
+  // Test get_node
   st::node* bool_node = tree->get_node("var_bool");
   BOOST_CHECK(bool_node);
 
+  // Test successful get_request
   std::string result;
   std::set<std::string> value;
   st::node const* node;
@@ -72,5 +74,14 @@ BOOST_AUTO_TEST_CASE(first)
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("true"));
   BOOST_CHECK_EQUAL(node, bool_node);
+
+  // Test successful changeRequest
+  result = tree->changeRequest("subtree:var_int", "3", su);
+  BOOST_CHECK_EQUAL(result, "");
+
+  // Check value actually changed
+  boost::tie(result, value, node) = tree->get_request("subtree:var_int", su);
+  BOOST_CHECK_EQUAL(result, "");
+  BOOST_CHECK(value == boost::assign::list_of("3"));
 }
 
