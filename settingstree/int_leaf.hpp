@@ -32,7 +32,7 @@ class int_leaf : public leaf {
     virtual std::set<std::string> getValue() const;
     virtual leaf_callback<T>& callback() { return callback_; }
   public:
-    inline T getValueAsInt() const { return value; }
+    inline T value_int() const { return value; }
 };
 
 }

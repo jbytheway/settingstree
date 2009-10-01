@@ -21,7 +21,7 @@ class test_callback :
     return "";
   }
   virtual std::string setting_altering(st::int_leaf<int>& l, int v) {
-    BOOST_CHECK_EQUAL(l.getValueAsInt(), 1);
+    BOOST_CHECK_EQUAL(l.value_int(), 1);
     BOOST_CHECK_EQUAL(v, 3);
     std::cout << "altering int" << std::endl;
     return "";
