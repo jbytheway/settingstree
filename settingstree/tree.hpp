@@ -20,7 +20,7 @@ class tree : public branch {
         const std::string& value,
         const settings_user* user
       );
-    boost::tuple<std::string, std::set<std::string>, node const*> getRequest(
+    boost::tuple<std::string, std::set<std::string>, node const*> get_request(
         const std::string& nodeAddress,
         const settings_user* user
       ) const;

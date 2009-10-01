@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(first)
   std::set<std::string> value;
   st::node const* node;
 
-  boost::tie(result, value, node) = tree->getRequest("var_bool", &su);
+  boost::tie(result, value, node) = tree->get_request("var_bool", &su);
 
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("true"));

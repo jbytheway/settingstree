@@ -50,7 +50,7 @@ std::string tree::changeRequest(
 }
 
 boost::tuple<std::string, std::set<std::string>, node const*>
-tree::getRequest(
+tree::get_request(
     const std::string& nodeAddress,
     const settings_user* user
   ) const
