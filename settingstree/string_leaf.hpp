@@ -23,6 +23,8 @@ class string_leaf : public leaf {
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;
     virtual leaf_callback<std::string>& callback() { return callback_; }
+  public:
+    inline const std::string& value_string() const { return value; }
 };
 
 }

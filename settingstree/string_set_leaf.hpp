@@ -28,9 +28,7 @@ class string_set_leaf : public leaf {
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;
   public:
-    inline const std::set<std::string>& getValueAsSet() const {
-      return value;
-    }
+    virtual std::set<std::string> const value_set() const { return value; }
 };
 
 }

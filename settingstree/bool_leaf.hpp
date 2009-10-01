@@ -24,7 +24,7 @@ class bool_leaf : public leaf {
     virtual std::set<std::string> getValue() const;
     virtual leaf_callback<bool>& callback() { return callback_; }
   public:
-    inline bool getValueAsBool() const { return value; }
+    inline bool value_bool() const { return value; }
 };
 
 }
