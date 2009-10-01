@@ -18,14 +18,14 @@ branch::branch(
 
 node* branch::addChild(node::ptr child) {
   node* cp = child.get();
-  children[child->getName()] = std::move(child);
+  children_[child->getName()] = std::move(child);
   callback_.children_altered(*this);
   return cp;
 }
 
 void branch::removeChild(std::string name) {
-  assert(children.count(name));
-  children.erase(name);
+  assert(children_.count(name));
+  children_.erase(name);
   callback_.children_altered(*this);
 }
 
@@ -110,7 +110,7 @@ std::set<std::string> branch::getChildNames() const
 {
   std::set<std::string> childNames;
   for (boost::unordered_map<std::string, node::ptr>::const_iterator
-      child = children.begin(); child != children.end(); child++) {
+      child = children_.begin(); child != children_.end(); child++) {
     childNames.insert(child->second->getName());
   }
   return childNames;
@@ -119,9 +119,9 @@ std::set<std::string> branch::getChildNames() const
 node* branch::getChild(std::string name)
 {
   boost::unordered_map<std::string, node::ptr>::iterator child =
-    children.find(name);
+    children_.find(name);
 
-  if (child == children.end()) {
+  if (child == children_.end()) {
     return NULL;
   }
 
@@ -131,9 +131,9 @@ node* branch::getChild(std::string name)
 node const* branch::getChild(std::string name) const
 {
   boost::unordered_map<std::string, node::ptr>::const_iterator child =
-    children.find(name);
+    children_.find(name);
 
-  if (child == children.end()) {
+  if (child == children_.end()) {
     return NULL;
   }
 

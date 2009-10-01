@@ -23,7 +23,7 @@ class branch : public node {
         branch_callback&
       );
   private:
-    boost::unordered_map<std::string, node::ptr> children;
+    boost::unordered_map<std::string, node::ptr> children_;
     branch_callback& callback_;
   protected:
     virtual node* getNodeByListRef(std::list<std::string>& nodeAddress);
