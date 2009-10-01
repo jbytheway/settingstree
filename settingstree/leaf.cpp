@@ -53,7 +53,7 @@ std::string leaf::changeRequestListRef(
   std::string reason = setValue(value);
 
   if (reason == "") {
-    callback().setting_altered(this);
+    callback().setting_altered(*this);
   }
 
   return reason;

@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <settingstree/tree_traits.hpp>
+
 namespace settingstree {
 
 class leaf;
@@ -11,7 +13,7 @@ namespace detail {
 
 class generic_leaf_callback {
   public:
-    virtual void setting_altered(leaf* altered) = 0;
+    virtual void setting_altered(leaf& altered) = 0;
   protected:
     generic_leaf_callback() {}
     generic_leaf_callback(generic_leaf_callback const&) {}
@@ -27,7 +29,9 @@ inline generic_leaf_callback::~generic_leaf_callback() {}
 template<typename T>
 class leaf_callback : public detail::generic_leaf_callback {
   public:
-    virtual std::string setting_altering(leaf* altering, T newValue) = 0;
+    virtual std::string setting_altering(
+        typename tree_traits<T>::leaf_type& altering, T newValue
+      ) = 0;
   protected:
     leaf_callback() {}
     leaf_callback(leaf_callback const&) {}

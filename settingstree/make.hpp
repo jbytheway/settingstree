@@ -8,10 +8,12 @@
 #include <boost/fusion/include/as_vector.hpp>
 #include <boost/fusion/include/for_each.hpp>
 
-#include <settingstree/leaf.hpp>
 #include <settingstree/branch.hpp>
 #include <settingstree/tree.hpp>
 #include <settingstree/tree_traits.hpp>
+#include <settingstree/bool_leaf.hpp>
+#include <settingstree/string_leaf.hpp>
+#include <settingstree/string_set_leaf.hpp>
 #include <settingstree/int_leaf-methods.hpp>
 
 namespace settingstree {

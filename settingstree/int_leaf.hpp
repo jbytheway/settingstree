@@ -1,6 +1,9 @@
 #ifndef SETTINGSTREE__INT_LEAF_HPP
 #define SETTINGSTREE__INT_LEAF_HPP
 
+#include <boost/type_traits/is_integral.hpp>
+#include <boost/type_traits/is_same.hpp>
+
 #include <settingstree/leaf.hpp>
 
 namespace settingstree {

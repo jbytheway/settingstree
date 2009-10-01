@@ -19,7 +19,7 @@ string_leaf::string_leaf(
 std::string string_leaf::setValue(const std::string& v)
 {
   std::string reason;
-  if ("" != (reason = callback_.setting_altering(this, v))) {
+  if ("" != (reason = callback_.setting_altering(*this, v))) {
     return reason;
   }
   value = v;

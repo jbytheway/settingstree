@@ -24,7 +24,7 @@ std::string bool_leaf::setValue(const std::string& v)
     } else {
       std::string reason;
       if ("" !=
-          (reason = callback_.setting_altering(this, true))) {
+          (reason = callback_.setting_altering(*this, true))) {
         return reason;
       }
       
@@ -37,7 +37,7 @@ std::string bool_leaf::setValue(const std::string& v)
     } else {
       std::string reason;
       if ("" !=
-          (reason = callback_.setting_altering(this, false))) {
+          (reason = callback_.setting_altering(*this, false))) {
         return reason;
       }
       

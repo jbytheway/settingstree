@@ -9,7 +9,7 @@ class branch;
 
 class branch_callback {
   public:
-    virtual void children_altered(branch* altered) = 0;
+    virtual void children_altered(branch& altered) = 0;
   protected:
     branch_callback() {}
     branch_callback(branch_callback const&) {}

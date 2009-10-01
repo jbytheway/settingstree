@@ -1,12 +1,16 @@
 #ifndef SETTINGSTREE__TREE_TRAITS_H
 #define SETTINGSTREE__TREE_TRAITS_H
 
-#include <settingstree/int_leaf.hpp>
-#include <settingstree/string_leaf.hpp>
-#include <settingstree/string_set_leaf.hpp>
-#include <settingstree/bool_leaf.hpp>
-
 namespace settingstree {
+
+template<typename T>
+class int_leaf;
+
+class string_leaf;
+
+class string_set_leaf;
+
+class bool_leaf;
 
 /** \brief Traits class for helping with settings tree generic programming */
 template<typename T>
