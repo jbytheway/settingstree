@@ -50,7 +50,7 @@ std::string bool_leaf::setValue(const std::string& v)
   return "invalid value for boolean leaf";
 }
 
-std::set<std::string> bool_leaf::getValue() const
+std::set<std::string> bool_leaf::value_set() const
 {
   return boost::assign::list_of(value_ ? "true" : "false");
 }

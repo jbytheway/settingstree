@@ -21,10 +21,10 @@ class string_leaf : public leaf {
     leaf_callback<std::string>& callback_;
 
     virtual std::string setValue(const std::string& v);
-    virtual std::set<std::string> getValue() const;
+    virtual std::set<std::string> value_set() const;
     virtual leaf_callback<std::string>& callback() { return callback_; }
   public:
-    inline const std::string& value_string() const { return value_; }
+    inline const std::string& value() const { return value_; }
 };
 
 }

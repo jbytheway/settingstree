@@ -26,9 +26,9 @@ class string_set_leaf : public leaf {
     leaf_callback<std::set<std::string> >& callback_;
   protected:
     virtual std::string setValue(const std::string& v);
-    virtual std::set<std::string> getValue() const;
+    virtual std::set<std::string> value_set() const;
   public:
-    virtual std::set<std::string> const value_set() const { return value_; }
+    virtual std::set<std::string> const value() const { return value_; }
 };
 
 }

@@ -74,7 +74,7 @@ leaf::getRequestListRef(
     return std::string("node '") + getFullName() + "' is a leaf and has no child";
   }
 
-  return boost::make_tuple("", getValue(), this);
+  return boost::make_tuple("", value_set(), this);
 }
 
 }

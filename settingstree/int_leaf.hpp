@@ -29,10 +29,10 @@ class int_leaf : public leaf {
     leaf_callback<T>& callback_;
   protected:
     virtual std::string setValue(const std::string& v);
-    virtual std::set<std::string> getValue() const;
+    virtual std::set<std::string> value_set() const;
     virtual leaf_callback<T>& callback() { return callback_; }
   public:
-    inline T value_int() const { return value_; }
+    inline T value() const { return value_; }
 };
 
 }

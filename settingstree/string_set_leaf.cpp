@@ -66,7 +66,7 @@ std::string string_set_leaf::setValue(const std::string& v)
   return "";
 }
 
-std::set<std::string> string_set_leaf::getValue() const
+std::set<std::string> string_set_leaf::value_set() const
 {
   return value_;
 }

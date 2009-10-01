@@ -36,7 +36,7 @@ class leaf : public node {
     virtual detail::generic_leaf_callback& callback() = 0;
   public:
     bool isLeaf() const { return true; }
-    virtual std::set<std::string> getValue() const = 0;
+    virtual std::set<std::string> value_set() const = 0;
 };
 
 }

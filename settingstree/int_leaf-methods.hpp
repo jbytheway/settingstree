@@ -40,7 +40,7 @@ std::string int_leaf<T>::setValue(const std::string& s)
 }
 
 template<typename T>
-std::set<std::string> int_leaf<T>::getValue() const
+std::set<std::string> int_leaf<T>::value_set() const
 {
   return boost::assign::list_of(boost::lexical_cast<std::string>(value_));
 }

@@ -21,7 +21,7 @@ class test_callback :
     return "";
   }
   virtual std::string setting_altering(st::int_leaf<int>& l, int v) {
-    BOOST_CHECK_EQUAL(l.value_int(), 1);
+    BOOST_CHECK_EQUAL(l.value(), 1);
     BOOST_CHECK_EQUAL(v, 3);
     std::cout << "altering int" << std::endl;
     return "";
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(first)
   BOOST_CHECK(b_node);
   st::bool_leaf* bool_node = dynamic_cast<st::bool_leaf*>(b_node);
   BOOST_CHECK(bool_node);
-  BOOST_CHECK_EQUAL(bool_node->value_bool(), true);
+  BOOST_CHECK_EQUAL(bool_node->value(), true);
 
   // Test successful get_request
   std::string result;

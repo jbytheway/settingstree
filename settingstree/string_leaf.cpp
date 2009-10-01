@@ -28,7 +28,7 @@ std::string string_leaf::setValue(const std::string& v)
   return "";
 }
 
-std::set<std::string> string_leaf::getValue() const
+std::set<std::string> string_leaf::value_set() const
 {
   return boost::assign::list_of(value_);
 }
