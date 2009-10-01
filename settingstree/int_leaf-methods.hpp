@@ -2,6 +2,7 @@
 #define SETTINGSTREE__INT_LEAF_METHODS_HPP
 
 #include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
 
 #include <settingstree/int_leaf.hpp>
 
@@ -17,7 +18,7 @@ int_leaf<T>::int_leaf(
     T v
   ) :
   leaf(name, readers, writers, parent),
-  value(v),
+  value_(v),
   callback_(callback)
 {
 }  
@@ -26,7 +27,7 @@ template<typename T>
 std::string int_leaf<T>::setValue(const std::string& s)
 {
   T v = boost::lexical_cast<T>(s);
-  if (v == value) {
+  if (v == value_) {
     return "setting already has that value";
   }
   std::string reason;
@@ -34,16 +35,14 @@ std::string int_leaf<T>::setValue(const std::string& s)
     return reason;
   }
 
-  value = v;
+  value_ = v;
   return "";
 }
 
 template<typename T>
 std::set<std::string> int_leaf<T>::getValue() const
 {
-  std::set<std::string> result;
-  result.insert(boost::lexical_cast<std::string>(value));
-  return result;
+  return boost::assign::list_of(boost::lexical_cast<std::string>(value_));
 }
 
 }

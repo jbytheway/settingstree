@@ -11,7 +11,7 @@ string_set_leaf::string_set_leaf(
     const std::set<std::string>& initialValue
   ) :
   leaf(name, readers, writers, parent),
-  value(initialValue),
+  value_(initialValue),
   callback_(callback)
 {
 }
@@ -23,7 +23,7 @@ std::string string_set_leaf::setValue(const std::string& v)
         "be '0', '+' or '-'";
   }
   
-  std::set<std::string> newValue = value;
+  std::set<std::string> newValue = value_;
   
   switch (v[0]) {
     case '0':
@@ -62,13 +62,13 @@ std::string string_set_leaf::setValue(const std::string& v)
     ) {
     return reason;
   }
-  value = newValue;
+  value_ = newValue;
   return "";
 }
 
 std::set<std::string> string_set_leaf::getValue() const
 {
-  return value;
+  return value_;
 }
 
 }

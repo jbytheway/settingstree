@@ -1,5 +1,7 @@
 #include <settingstree/bool_leaf.hpp>
 
+#include <boost/assign/list_of.hpp>
+
 namespace settingstree {
 
 bool_leaf::bool_leaf(
@@ -11,7 +13,7 @@ bool_leaf::bool_leaf(
     bool v
   ) :
   leaf(name, readers, writers, parent),
-  value(v),
+  value_(v),
   callback_(callback)
 {
 }
@@ -19,7 +21,7 @@ bool_leaf::bool_leaf(
 std::string bool_leaf::setValue(const std::string& v)
 {
   if (v == "true" || v == "1" || v == "on") {
-    if (value) {
+    if (value_) {
       return "setting already has that value";
     } else {
       std::string reason;
@@ -28,11 +30,11 @@ std::string bool_leaf::setValue(const std::string& v)
         return reason;
       }
       
-      value = true;
+      value_ = true;
       return "";
     }
   } else if (v == "false" || v == "0" || v == "off") {
-    if (!value) {
+    if (!value_) {
       return "setting already has that value";
     } else {
       std::string reason;
@@ -41,7 +43,7 @@ std::string bool_leaf::setValue(const std::string& v)
         return reason;
       }
       
-      value = false;
+      value_ = false;
       return "";
     }
   }
@@ -50,13 +52,7 @@ std::string bool_leaf::setValue(const std::string& v)
 
 std::set<std::string> bool_leaf::getValue() const
 {
-  std::set<std::string> result;
-  if (value) {
-    result.insert("true");
-  } else {
-    result.insert("false");
-  }
-  return result;
+  return boost::assign::list_of(value_ ? "true" : "false");
 }
 
 }

@@ -22,13 +22,13 @@ class string_set_leaf : public leaf {
       );
     virtual ~string_set_leaf() { }
   private:
-    std::set<std::string> value;
+    std::set<std::string> value_;
     leaf_callback<std::set<std::string> >& callback_;
   protected:
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;
   public:
-    virtual std::set<std::string> const value_set() const { return value; }
+    virtual std::set<std::string> const value_set() const { return value_; }
 };
 
 }

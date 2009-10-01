@@ -17,14 +17,14 @@ class string_leaf : public leaf {
       );
     virtual ~string_leaf() { }
   protected:
-    std::string value;
+    std::string value_;
     leaf_callback<std::string>& callback_;
 
     virtual std::string setValue(const std::string& v);
     virtual std::set<std::string> getValue() const;
     virtual leaf_callback<std::string>& callback() { return callback_; }
   public:
-    inline const std::string& value_string() const { return value; }
+    inline const std::string& value_string() const { return value_; }
 };
 
 }

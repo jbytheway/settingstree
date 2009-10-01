@@ -1,5 +1,7 @@
 #include <settingstree/string_leaf.hpp>
 
+#include <boost/assign/list_of.hpp>
+
 namespace settingstree {
 
 string_leaf::string_leaf(
@@ -11,7 +13,7 @@ string_leaf::string_leaf(
     const std::string& initialValue
   ) :
   leaf(name, readers, writers, parent),
-  value(initialValue),
+  value_(initialValue),
   callback_(callback)
 {
 }
@@ -22,15 +24,13 @@ std::string string_leaf::setValue(const std::string& v)
   if ("" != (reason = callback_.setting_altering(*this, v))) {
     return reason;
   }
-  value = v;
+  value_ = v;
   return "";
 }
 
 std::set<std::string> string_leaf::getValue() const
 {
-  std::set<std::string> result;
-  result.insert(value);
-  return result;
+  return boost::assign::list_of(value_);
 }
 
 }
