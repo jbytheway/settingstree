@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(first)
   st::node* b_node = tree->get_node("var_bool");
   BOOST_CHECK(b_node);
   st::bool_leaf* bool_node = dynamic_cast<st::bool_leaf*>(b_node);
-  BOOST_CHECK(bool_node);
+  BOOST_REQUIRE(bool_node);
   BOOST_CHECK_EQUAL(bool_node->value(), true);
 
   // Test successful get_request
