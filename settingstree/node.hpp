@@ -25,7 +25,7 @@ class node :
 
     virtual ~node() = 0;
 
-    inline const std::string& getName() const { return name; }
+    inline const std::string& name() const { return name_; }
     virtual bool is_leaf() const = 0;
     inline const std::set<std::string>& getReadingGroups() const {
       return readingGroups;
@@ -72,7 +72,7 @@ class node :
       ); /* both readers and writers are interpreted as a comma-seperated list
             of group names.  'server' is added automatically to both lists */
   private:
-    std::string name;
+    std::string name_;
     branch* parent;
       /* node above this in the tree (NULL if this is the root node).
        * Not owned by this. */

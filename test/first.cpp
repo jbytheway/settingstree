@@ -71,9 +71,9 @@ BOOST_AUTO_TEST_CASE(first)
 
   // Simple accessors
   BOOST_CHECK_EQUAL(bool_node->is_leaf(), true);
-  BOOST_CHECK_EQUAL(bool_node->getName(), "var_bool");
+  BOOST_CHECK_EQUAL(bool_node->name(), "var_bool");
   BOOST_CHECK_EQUAL(tree->is_leaf(), false);
-  BOOST_CHECK_EQUAL(tree->getName(), "");
+  BOOST_CHECK_EQUAL(tree->name(), "");
   BOOST_CHECK(
       tree->getChildNames() == boost::assign::list_of("subtree")("var_bool")
     );

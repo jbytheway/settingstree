@@ -20,7 +20,7 @@ node::node(
     const std::string& writers,
     branch* p
   ) :
-  name(n),
+  name_(n),
   parent(p),
   readingGroups(),
   writingGroups()
@@ -63,8 +63,8 @@ void node::appendFullNameAsList(std::list<std::string>& fullName) const
   if (parent != NULL) {
     parent->appendFullNameAsList(fullName);
   }
-  if (!name.empty()) {
-    fullName.push_back(name);
+  if (!name_.empty()) {
+    fullName.push_back(name_);
   }
 }
 
@@ -80,8 +80,8 @@ void node::streamFullName(std::ostream& nameStream) const
   if (parent != NULL) {
     parent->streamFullName(nameStream);
   }
-  if (!name.empty()) {
-    nameStream << SETTINGSTREE_DELIMITER << name;
+  if (!name_.empty()) {
+    nameStream << SETTINGSTREE_DELIMITER << name_;
   }
 }
 

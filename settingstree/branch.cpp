@@ -18,7 +18,7 @@ branch::branch(
 
 node* branch::addChild(node::ptr child) {
   node* cp = child.get();
-  children_[child->getName()] = std::move(child);
+  children_[child->name()] = std::move(child);
   callback_.children_altered(*this);
   return cp;
 }
@@ -111,7 +111,7 @@ std::set<std::string> branch::getChildNames() const
   std::set<std::string> childNames;
   for (boost::unordered_map<std::string, node::ptr>::const_iterator
       child = children_.begin(); child != children_.end(); child++) {
-    childNames.insert(child->second->getName());
+    childNames.insert(child->second->name());
   }
   return childNames;
 }
