@@ -77,6 +77,7 @@ BOOST_AUTO_TEST_CASE(first)
   BOOST_CHECK(
       tree->child_names() == boost::assign::list_of("subtree")("var_bool")
     );
+  BOOST_CHECK_EQUAL(tree->getChild("var_bool"), bool_node);
 
   // Test successful get_request
   std::string result;
