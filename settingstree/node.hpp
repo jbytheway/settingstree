@@ -5,7 +5,6 @@
 #include <iosfwd>
 #include <memory>
 
-#include <boost/enable_shared_from_this.hpp>
 #include <boost/utility.hpp>
 #include <boost/tuple/tuple.hpp>
 
@@ -16,9 +15,7 @@ namespace settingstree {
 
 class branch;
 
-class node :
-  public boost::enable_shared_from_this<node>,
-  private boost::noncopyable {
+class node : private boost::noncopyable {
   public:
     typedef std::unique_ptr<node> ptr;
     typedef std::unique_ptr<const node> const_ptr;
