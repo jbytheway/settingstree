@@ -89,7 +89,7 @@ branch::getRequestListRef(
   }
   
   if (nodeAddress.empty()) {
-    return boost::make_tuple("", getChildNames(), this);
+    return boost::make_tuple("", child_names(), this);
   }
 
   node const* child = getChild(nodeAddress.front());
@@ -106,7 +106,7 @@ branch::getRequestListRef(
   return child->getRequestListRef(nodeAddress, user);
 }
 
-std::set<std::string> branch::getChildNames() const
+std::set<std::string> branch::child_names() const
 {
   std::set<std::string> childNames;
   for (boost::unordered_map<std::string, node::ptr>::const_iterator
