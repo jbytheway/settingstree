@@ -26,7 +26,9 @@ class test_callback :
     std::cout << "altering int" << std::endl;
     return "";
   }
-  virtual std::string setting_altering(st::string_leaf&, std::string) {
+  virtual std::string setting_altering(st::string_leaf& l, std::string v) {
+    BOOST_CHECK_EQUAL(l.value(), "flibble");
+    BOOST_CHECK_EQUAL(v, "wobble");
     std::cout << "altering string" << std::endl;
     return "";
   }
@@ -78,6 +80,8 @@ BOOST_AUTO_TEST_CASE(first)
       tree->child_names() == boost::assign::list_of("subtree")("var_bool")
     );
   BOOST_CHECK_EQUAL(tree->child("var_bool"), bool_node);
+  BOOST_CHECK_EQUAL(tree->getFullName(), "");
+  BOOST_CHECK_EQUAL(bool_node->getFullName(), ":var_bool");
 
   // Test successful get_request
   std::string result;
@@ -98,5 +102,17 @@ BOOST_AUTO_TEST_CASE(first)
   boost::tie(result, value, node) = tree->get_request("subtree:var_int", su);
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("3"));
+  BOOST_CHECK_EQUAL(node->getFullName(), ":subtree:var_int");
+
+  // Repeat with more superfluous name
+  result = tree->change_request("::subtree:var_string", "wobble", su);
+  BOOST_CHECK_EQUAL(result, "");
+
+  // Check value actually changed
+  boost::tie(result, value, node) =
+    tree->get_request("::subtree:var_string", su);
+  BOOST_CHECK_EQUAL(result, "");
+  BOOST_CHECK(value == boost::assign::list_of("wobble"));
+  BOOST_CHECK_EQUAL(node->getFullName(), ":subtree:var_string");
 }
 
