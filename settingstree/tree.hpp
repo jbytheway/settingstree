@@ -13,7 +13,11 @@ class tree : public branch {
     typedef std::unique_ptr<tree> ptr;
     typedef std::unique_ptr<tree const> const_ptr;
 
-    tree(branch_callback&);
+    tree(
+        const std::string& readers,
+        const std::string& writers,
+        branch_callback&
+      );
 
     std::string change_request(
         const std::string& node,

@@ -8,8 +8,12 @@
 
 namespace settingstree {
 
-tree::tree(branch_callback& callback) :
-  branch("", "world", "", NULL, callback)
+tree::tree(
+    const std::string& readers,
+    const std::string& writers,
+    branch_callback& callback
+  ) :
+  branch("", readers, writers, NULL, callback)
 {
 }
 
