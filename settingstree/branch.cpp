@@ -37,9 +37,9 @@ node* branch::getNodeByListRef(
     return this;
   }
 
-  node* child = getChild(nodeAddress.front());
+  node* ch = child(nodeAddress.front());
   
-  if (!child) {
+  if (!ch) {
     std::ostringstream os;
     os << "node '" << nodeAddress.front() << "' not found in '" <<
         getFullName() << "'";
@@ -48,7 +48,7 @@ node* branch::getNodeByListRef(
 
   nodeAddress.pop_front();
   
-  return child->getNodeByListRef(nodeAddress);
+  return ch->getNodeByListRef(nodeAddress);
 }
 
 std::string branch::changeRequestListRef(
@@ -65,16 +65,16 @@ std::string branch::changeRequestListRef(
     return "requested node '" + getFullName() + "' not a leaf";
   }
 
-  node* child = getChild(setting.front());
+  node* ch = child(setting.front());
 
-  if (!child) {
+  if (!ch) {
     return std::string("node '") + setting.front() + "' not found in '" +
       getFullName() + "'";
   }
 
   setting.pop_front();
   
-  return child->changeRequestListRef(setting, value, user);
+  return ch->changeRequestListRef(setting, value, user);
 }
 
 boost::tuple<std::string, std::set<std::string>, node const*>
@@ -92,9 +92,9 @@ branch::getRequestListRef(
     return boost::make_tuple("", child_names(), this);
   }
 
-  node const* child = getChild(nodeAddress.front());
+  node const* ch = child(nodeAddress.front());
 
-  if (!child) {
+  if (!ch) {
     return boost::make_tuple(
         std::string("node '") + nodeAddress.front() + "' not found in '" +
         getFullName() + "'", std::set<std::string>(), static_cast<node*>(NULL)
@@ -103,7 +103,7 @@ branch::getRequestListRef(
 
   nodeAddress.pop_front();
   
-  return child->getRequestListRef(nodeAddress, user);
+  return ch->getRequestListRef(nodeAddress, user);
 }
 
 std::set<std::string> branch::child_names() const
@@ -116,7 +116,7 @@ std::set<std::string> branch::child_names() const
   return childNames;
 }
 
-node* branch::getChild(std::string name)
+node* branch::child(std::string name)
 {
   boost::unordered_map<std::string, node::ptr>::iterator child =
     children_.find(name);
@@ -128,7 +128,7 @@ node* branch::getChild(std::string name)
   return child->second.get();
 }
 
-node const* branch::getChild(std::string name) const
+node const* branch::child(std::string name) const
 {
   boost::unordered_map<std::string, node::ptr>::const_iterator child =
     children_.find(name);

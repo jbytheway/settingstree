@@ -43,9 +43,9 @@ class branch : public node {
     bool is_leaf() const { return false; }
     std::set<std::string> child_names() const;
     /* Returns NULL if no such child */
-    node* getChild(std::string name);
+    node* child(std::string name);
     /* Returns NULL if no such child */
-    node const* getChild(std::string name) const;
+    node const* child(std::string name) const;
 };
 
 }
