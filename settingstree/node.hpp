@@ -28,10 +28,10 @@ class node :
     inline const std::string& name() const { return name_; }
     virtual bool is_leaf() const = 0;
     inline const std::set<std::string>& getReadingGroups() const {
-      return readingGroups;
+      return reading_groups_;
     }
     inline const std::set<std::string>& getWritingGroups() const {
-      return writingGroups;
+      return writing_groups_;
     }
     virtual node* getNodeByListRef(
         std::list<std::string>& nodeAddress
@@ -73,11 +73,11 @@ class node :
             of group names.  'server' is added automatically to both lists */
   private:
     std::string name_;
-    branch* parent;
+    branch* parent_;
       /* node above this in the tree (NULL if this is the root node).
        * Not owned by this. */
-    std::set<std::string> readingGroups; /* Groups with read permission */
-    std::set<std::string> writingGroups; /* Groups with write permission */
+    std::set<std::string> reading_groups_; /* Groups with read permission */
+    std::set<std::string> writing_groups_; /* Groups with write permission */
 };
 
 }

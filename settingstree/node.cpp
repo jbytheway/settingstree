@@ -21,14 +21,14 @@ node::node(
     branch* p
   ) :
   name_(n),
-  parent(p),
-  readingGroups(),
-  writingGroups()
+  parent_(p),
+  reading_groups_(),
+  writing_groups_()
 {
   assert((p == NULL) == n.empty());
 
-  readingGroups.insert("server");
-  writingGroups.insert("server");
+  reading_groups_.insert("server");
+  writing_groups_.insert("server");
 
   std::list<std::string> readerList;
   boost::algorithm::split(
@@ -37,7 +37,7 @@ node::node(
 
   for (std::list<std::string>::iterator reader = readerList.begin();
       reader != readerList.end(); reader++) {
-    readingGroups.insert(*reader);
+    reading_groups_.insert(*reader);
   }
 
   std::list<std::string> writerList;
@@ -47,7 +47,7 @@ node::node(
 
   for (std::list<std::string>::iterator writer = writerList.begin();
       writer != writerList.end(); writer++) {
-    writingGroups.insert(*writer);
+    writing_groups_.insert(*writer);
   }
 }
 
@@ -60,8 +60,8 @@ std::string node::getFullName() const
 
 void node::appendFullNameAsList(std::list<std::string>& fullName) const
 {
-  if (parent != NULL) {
-    parent->appendFullNameAsList(fullName);
+  if (parent_) {
+    parent_->appendFullNameAsList(fullName);
   }
   if (!name_.empty()) {
     fullName.push_back(name_);
@@ -77,8 +77,8 @@ std::list<std::string> node::getFullNameAsList() const
 
 void node::streamFullName(std::ostream& nameStream) const
 {
-  if (parent != NULL) {
-    parent->streamFullName(nameStream);
+  if (parent_) {
+    parent_->streamFullName(nameStream);
   }
   if (!name_.empty()) {
     nameStream << SETTINGSTREE_DELIMITER << name_;
