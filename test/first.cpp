@@ -48,6 +48,11 @@ class server_user : public st::settings_user {
     server_user() : st::settings_user("server") {}
 };
 
+class untrusted_user : public st::settings_user {
+  public:
+    untrusted_user() : st::settings_user("world") {}
+};
+
 BOOST_AUTO_TEST_CASE(first)
 {
   test_callback c;
@@ -63,6 +68,7 @@ BOOST_AUTO_TEST_CASE(first)
     ).tree_ptr();
 
   server_user su;
+  untrusted_user uu;
 
   // Test get_node
   st::node* b_node = tree->get_node("var_bool");
@@ -86,7 +92,9 @@ BOOST_AUTO_TEST_CASE(first)
       tree->getReadingGroups() == boost::assign::list_of("server")("world")
     );
   BOOST_CHECK(tree->getWritingGroups() == boost::assign::list_of("server"));
-  BOOST_CHECK(b_node->getReadingGroups() == boost::assign::list_of("server"));
+  BOOST_CHECK(
+      b_node->getReadingGroups() == boost::assign::list_of("server")("world")
+    );
   BOOST_CHECK(b_node->getWritingGroups() == boost::assign::list_of("server"));
 
   // Test successful get_request
@@ -105,9 +113,10 @@ BOOST_AUTO_TEST_CASE(first)
   BOOST_CHECK_EQUAL(result, "");
 
   // Check value actually changed
-  boost::tie(result, value, node) = tree->get_request("subtree:var_int", su);
+  boost::tie(result, value, node) = tree->get_request("subtree:var_int", uu);
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("3"));
+  BOOST_REQUIRE(node);
   BOOST_CHECK_EQUAL(node->full_name(), ":subtree:var_int");
 
   // Repeat with more superfluous name
@@ -116,9 +125,10 @@ BOOST_AUTO_TEST_CASE(first)
 
   // Check value actually changed
   boost::tie(result, value, node) =
-    tree->get_request("::subtree:var_string", su);
+    tree->get_request("::subtree:var_string", uu);
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("wobble"));
+  BOOST_REQUIRE(node);
   BOOST_CHECK_EQUAL(node->full_name(), ":subtree:var_string");
 }
 
