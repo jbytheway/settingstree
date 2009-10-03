@@ -32,22 +32,24 @@ node::node(
 
   std::list<std::string> readerList;
   boost::algorithm::split(
-      readerList, readers, boost::phoenix::arg_names::arg1 == ','
+      readerList, readers, boost::phoenix::arg_names::arg1 == ',',
+      boost::algorithm::token_compress_on
     );
 
   for (std::list<std::string>::iterator reader = readerList.begin();
       reader != readerList.end(); reader++) {
-    reading_groups_.insert(*reader);
+    if (!reader->empty()) reading_groups_.insert(*reader);
   }
 
   std::list<std::string> writerList;
   boost::algorithm::split(
-      writerList, writers, boost::phoenix::arg_names::arg1 == ','
+      writerList, writers, boost::phoenix::arg_names::arg1 == ',',
+      boost::algorithm::token_compress_on
     );
 
   for (std::list<std::string>::iterator writer = writerList.begin();
       writer != writerList.end(); writer++) {
-    writing_groups_.insert(*writer);
+    if (!writer->empty()) writing_groups_.insert(*writer);
   }
 }
 
