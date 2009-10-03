@@ -40,7 +40,7 @@ class branch : public node {
   public:
     node* addChild(node::ptr child);
     void removeChild(std::string name);
-    bool isLeaf() const { return false; }
+    bool is_leaf() const { return false; }
     std::set<std::string> getChildNames() const;
     /* Returns node::Ptr() if no such child */
     node* getChild(std::string name);

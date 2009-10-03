@@ -26,7 +26,7 @@ class node :
     virtual ~node() = 0;
 
     inline const std::string& getName() const { return name; }
-    virtual bool isLeaf() const = 0;
+    virtual bool is_leaf() const = 0;
     inline const std::set<std::string>& getReadingGroups() const {
       return readingGroups;
     }
