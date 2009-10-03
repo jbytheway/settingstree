@@ -80,8 +80,8 @@ BOOST_AUTO_TEST_CASE(first)
       tree->child_names() == boost::assign::list_of("subtree")("var_bool")
     );
   BOOST_CHECK_EQUAL(tree->child("var_bool"), bool_node);
-  BOOST_CHECK_EQUAL(tree->getFullName(), "");
-  BOOST_CHECK_EQUAL(bool_node->getFullName(), ":var_bool");
+  BOOST_CHECK_EQUAL(tree->full_name(), "");
+  BOOST_CHECK_EQUAL(bool_node->full_name(), ":var_bool");
 
   // Test successful get_request
   std::string result;
@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(first)
   boost::tie(result, value, node) = tree->get_request("subtree:var_int", su);
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("3"));
-  BOOST_CHECK_EQUAL(node->getFullName(), ":subtree:var_int");
+  BOOST_CHECK_EQUAL(node->full_name(), ":subtree:var_int");
 
   // Repeat with more superfluous name
   result = tree->change_request("::subtree:var_string", "wobble", su);
@@ -113,6 +113,6 @@ BOOST_AUTO_TEST_CASE(first)
     tree->get_request("::subtree:var_string", su);
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("wobble"));
-  BOOST_CHECK_EQUAL(node->getFullName(), ":subtree:var_string");
+  BOOST_CHECK_EQUAL(node->full_name(), ":subtree:var_string");
 }
 

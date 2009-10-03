@@ -40,7 +40,7 @@ class node :
         std::list<std::string> nodeAddress
       ) { return getNodeByListRef(nodeAddress); }
     virtual void streamFullName(std::ostream& nameStream) const;
-    virtual std::string getFullName() const;
+    virtual std::string full_name() const;
     virtual void appendFullNameAsList(std::list<std::string>&) const;
     virtual std::list<std::string> getFullNameAsList() const;
     virtual std::string changeRequestListRef(

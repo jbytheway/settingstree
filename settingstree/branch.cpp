@@ -42,7 +42,7 @@ node* branch::getNodeByListRef(
   if (!ch) {
     std::ostringstream os;
     os << "node '" << nodeAddress.front() << "' not found in '" <<
-        getFullName() << "'";
+        full_name() << "'";
     throw std::logic_error(os.str());
   }
 
@@ -57,19 +57,19 @@ std::string branch::changeRequestListRef(
     const settings_user& user)
 {
   if (!user.hasReadPermissionFor(this)) {
-    return std::string("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + full_name() +
       "': permission denied";
   }
   
   if (setting.empty()) {
-    return "requested node '" + getFullName() + "' not a leaf";
+    return "requested node '" + full_name() + "' not a leaf";
   }
 
   node* ch = child(setting.front());
 
   if (!ch) {
     return std::string("node '") + setting.front() + "' not found in '" +
-      getFullName() + "'";
+      full_name() + "'";
   }
 
   setting.pop_front();
@@ -84,7 +84,7 @@ branch::getRequestListRef(
   ) const
 {
   if (!user.hasReadPermissionFor(this)) {
-    return std::string("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + full_name() +
       "': permission denied";
   }
   
@@ -97,7 +97,7 @@ branch::getRequestListRef(
   if (!ch) {
     return boost::make_tuple(
         std::string("node '") + nodeAddress.front() + "' not found in '" +
-        getFullName() + "'", std::set<std::string>(), static_cast<node*>(NULL)
+        full_name() + "'", std::set<std::string>(), static_cast<node*>(NULL)
       );
   }
 

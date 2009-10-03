@@ -51,7 +51,7 @@ node::node(
   }
 }
 
-std::string node::getFullName() const
+std::string node::full_name() const
 {
   std::ostringstream nameStream;
   streamFullName(nameStream);

@@ -22,7 +22,7 @@ node* leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
 {
   if (!nodeAddress.empty()) {
     std::ostringstream os;
-    os << "sought child of leaf '" << getFullName() << "'";
+    os << "sought child of leaf '" << full_name() << "'";
     throw std::logic_error(os.str());
   }
 
@@ -37,16 +37,16 @@ std::string leaf::changeRequestListRef(
   //Debug("checking permissions for node " << getFullName());
   
   if (!user.hasReadPermissionFor(this)) {
-    return std::string("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + full_name() +
       "': permission denied";
   }
   
   if (!nodeAddress.empty()) {
-    return std::string("node '") + getFullName() + "' is a leaf and has no child";
+    return std::string("node '") + full_name() + "' is a leaf and has no child";
   }
   
   if (!user.hasWritePermissionFor(this)) {
-    return std::string("cannot write to node '") + getFullName() +
+    return std::string("cannot write to node '") + full_name() +
       "': permission denied";
   }
 
@@ -66,12 +66,12 @@ leaf::getRequestListRef(
   ) const
 {
   if (!user.hasReadPermissionFor(this)) {
-    return std::string("cannot read node '") + getFullName() +
+    return std::string("cannot read node '") + full_name() +
       "': permission denied";
   }
   
   if (!nodeAddress.empty()) {
-    return std::string("node '") + getFullName() + "' is a leaf and has no child";
+    return std::string("node '") + full_name() + "' is a leaf and has no child";
   }
 
   return boost::make_tuple("", value_set(), this);
