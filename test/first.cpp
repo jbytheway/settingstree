@@ -89,13 +89,13 @@ BOOST_AUTO_TEST_CASE(first)
   BOOST_CHECK_EQUAL(tree->full_name(), "");
   BOOST_CHECK_EQUAL(bool_node->full_name(), ":var_bool");
   BOOST_CHECK(
-      tree->getReadingGroups() == boost::assign::list_of("server")("world")
+      tree->reading_groups() == boost::assign::list_of("server")("world")
     );
-  BOOST_CHECK(tree->getWritingGroups() == boost::assign::list_of("server"));
+  BOOST_CHECK(tree->writing_groups() == boost::assign::list_of("server"));
   BOOST_CHECK(
-      b_node->getReadingGroups() == boost::assign::list_of("server")("world")
+      b_node->reading_groups() == boost::assign::list_of("server")("world")
     );
-  BOOST_CHECK(b_node->getWritingGroups() == boost::assign::list_of("server"));
+  BOOST_CHECK(b_node->writing_groups() == boost::assign::list_of("server"));
 
   // Test successful get_request
   std::string result;

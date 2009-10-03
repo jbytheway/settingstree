@@ -27,10 +27,10 @@ class node :
 
     inline const std::string& name() const { return name_; }
     virtual bool is_leaf() const = 0;
-    inline const std::set<std::string>& getReadingGroups() const {
+    inline const std::set<std::string>& reading_groups() const {
       return reading_groups_;
     }
-    inline const std::set<std::string>& getWritingGroups() const {
+    inline const std::set<std::string>& writing_groups() const {
       return writing_groups_;
     }
     virtual node* getNodeByListRef(
