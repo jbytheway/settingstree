@@ -71,31 +71,29 @@ BOOST_AUTO_TEST_CASE(first)
   untrusted_user uu;
 
   // Test get_node
-  st::node* b_node = tree->get_node("var_bool");
-  BOOST_CHECK(b_node);
-  st::bool_leaf* bool_node = dynamic_cast<st::bool_leaf*>(b_node);
-  BOOST_REQUIRE(bool_node);
-  BOOST_CHECK_EQUAL(bool_node->value(), true);
+  st::node& b_node = tree->get_node("var_bool");
+  st::bool_leaf& bool_node = dynamic_cast<st::bool_leaf&>(b_node);
+  BOOST_CHECK_EQUAL(bool_node.value(), true);
 
   // Simple accessors
-  BOOST_CHECK_EQUAL(bool_node->is_leaf(), true);
-  BOOST_CHECK_EQUAL(bool_node->name(), "var_bool");
+  BOOST_CHECK_EQUAL(bool_node.is_leaf(), true);
+  BOOST_CHECK_EQUAL(bool_node.name(), "var_bool");
   BOOST_CHECK_EQUAL(tree->is_leaf(), false);
   BOOST_CHECK_EQUAL(tree->name(), "");
   BOOST_CHECK(
       tree->child_names() == boost::assign::list_of("subtree")("var_bool")
     );
-  BOOST_CHECK_EQUAL(tree->child("var_bool"), bool_node);
+  BOOST_CHECK_EQUAL(tree->child("var_bool"), &bool_node);
   BOOST_CHECK_EQUAL(tree->full_name(), "");
-  BOOST_CHECK_EQUAL(bool_node->full_name(), ":var_bool");
+  BOOST_CHECK_EQUAL(bool_node.full_name(), ":var_bool");
   BOOST_CHECK(
       tree->reading_groups() == boost::assign::list_of("server")("world")
     );
   BOOST_CHECK(tree->writing_groups() == boost::assign::list_of("server"));
   BOOST_CHECK(
-      b_node->reading_groups() == boost::assign::list_of("server")("world")
+      b_node.reading_groups() == boost::assign::list_of("server")("world")
     );
-  BOOST_CHECK(b_node->writing_groups() == boost::assign::list_of("server"));
+  BOOST_CHECK(b_node.writing_groups() == boost::assign::list_of("server"));
 
   // Test successful get_request
   std::string result;
@@ -106,7 +104,7 @@ BOOST_AUTO_TEST_CASE(first)
 
   BOOST_CHECK_EQUAL(result, "");
   BOOST_CHECK(value == boost::assign::list_of("true"));
-  BOOST_CHECK_EQUAL(node, bool_node);
+  BOOST_CHECK_EQUAL(node, &bool_node);
 
   // Test successful change_request
   result = tree->change_request("subtree:var_int", "3", su);
@@ -134,8 +132,8 @@ BOOST_AUTO_TEST_CASE(first)
   // Mutating the tree
   auto s2 = tree->add_child(st::make("var_string2", c, "foo").node_ptr(*tree));
   BOOST_CHECK_EQUAL(s2, tree->child("var_string2"));
-  BOOST_CHECK_EQUAL(s2, tree->get_node("var_string2"));
-  BOOST_CHECK_EQUAL(s2, tree->get_node(":var_string2:"));
+  BOOST_CHECK_EQUAL(s2, &tree->get_node("var_string2"));
+  BOOST_CHECK_EQUAL(s2, &tree->get_node(":var_string2:"));
   tree->remove_child("var_string2");
   BOOST_CHECK(!tree->child("var_string2"));
 }

@@ -31,10 +31,10 @@ class node : private boost::noncopyable {
     inline const std::set<std::string>& writing_groups() const {
       return writing_groups_;
     }
-    virtual node* getNodeByListRef(
+    virtual node& getNodeByListRef(
         std::list<std::string>& nodeAddress
       ) = 0; /* Note: alters its argument nodeAddress */
-    inline node* getNodeByList(
+    inline node& getNodeByList(
         std::list<std::string> nodeAddress
       ) { return getNodeByListRef(nodeAddress); }
     virtual void streamFullName(std::ostream& nameStream) const;

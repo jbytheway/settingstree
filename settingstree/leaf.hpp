@@ -19,7 +19,7 @@ class leaf : public node {
       );
   protected:
     virtual ~leaf() = 0;
-    virtual node* getNodeByListRef(
+    virtual node& getNodeByListRef(
         std::list<std::string>& nodeAddress
       );
     virtual std::string changeRequestListRef(

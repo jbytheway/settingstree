@@ -38,7 +38,7 @@ std::list<std::string> tree::stringNodeAddressToList(
   return addressAsList;
 }
 
-node* tree::get_node(const std::string& nodeAddress)
+node& tree::get_node(const std::string& nodeAddress)
 {
   return getNodeByList(stringNodeAddressToList(nodeAddress));
 }

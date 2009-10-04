@@ -32,12 +32,12 @@ void branch::remove_child(std::string name) {
   callback_.children_altered(*this);
 }
 
-node* branch::getNodeByListRef(
+node& branch::getNodeByListRef(
     std::list<std::string>& nodeAddress
   )
 {
   if (nodeAddress.empty()) {
-    return this;
+    return *this;
   }
 
   node* ch = child(nodeAddress.front());

@@ -26,7 +26,7 @@ class branch : public node {
     boost::unordered_map<std::string, node::ptr> children_;
     branch_callback& callback_;
   protected:
-    virtual node* getNodeByListRef(std::list<std::string>& nodeAddress);
+    virtual node& getNodeByListRef(std::list<std::string>& nodeAddress);
     virtual std::string changeRequestListRef(
         std::list<std::string>& setting,
         const std::string& value,

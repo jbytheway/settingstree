@@ -18,7 +18,7 @@ leaf::~leaf()
 {
 }
 
-node* leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
+node& leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
 {
   if (!nodeAddress.empty()) {
     std::ostringstream os;
@@ -26,7 +26,7 @@ node* leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
     throw std::logic_error(os.str());
   }
 
-  return this;
+  return *this;
 }
 
 std::string leaf::changeRequestListRef(

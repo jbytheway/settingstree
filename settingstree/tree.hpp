@@ -28,7 +28,7 @@ class tree : public branch {
         const std::string& nodeAddress,
         const user& user
       ) const;
-    node* get_node(const std::string& nodeAddress);
+    node& get_node(const std::string& nodeAddress);
   private:
     std::list<std::string>
       stringNodeAddressToList(const std::string& nodeAddress) const;
