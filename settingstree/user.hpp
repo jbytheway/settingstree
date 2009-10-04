@@ -15,8 +15,6 @@ class node;
  * This class keeps track of what groups a user of the settings tree belongs to
  * so that permissions can be calculated appropriately. */
 class user {
-  private:
-    user();
   protected:
     /** \brief Standard constructor
      *
