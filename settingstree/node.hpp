@@ -23,6 +23,7 @@ class node : private boost::noncopyable {
     virtual ~node() = 0;
 
     inline const std::string& name() const { return name_; }
+    inline branch const* parent() const { return parent_; }
     virtual bool is_leaf() const = 0;
     inline const std::set<std::string>& reading_groups() const {
       return reading_groups_;

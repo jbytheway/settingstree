@@ -132,11 +132,11 @@ BOOST_AUTO_TEST_CASE(first)
   BOOST_CHECK_EQUAL(node->full_name(), ":subtree:var_string");
 
   // Mutating the tree
-  auto s2 = tree->addChild(st::make("var_string2", c, "foo").node_ptr(*tree));
+  auto s2 = tree->add_child(st::make("var_string2", c, "foo").node_ptr(*tree));
   BOOST_CHECK_EQUAL(s2, tree->child("var_string2"));
   BOOST_CHECK_EQUAL(s2, tree->get_node("var_string2"));
   BOOST_CHECK_EQUAL(s2, tree->get_node(":var_string2:"));
-  tree->removeChild("var_string2");
+  tree->remove_child("var_string2");
   BOOST_CHECK(!tree->child("var_string2"));
 }
 

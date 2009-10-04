@@ -16,14 +16,17 @@ branch::branch(
 {
 }
 
-node* branch::addChild(node::ptr child) {
+node* branch::add_child(node::ptr child) {
+  if (child->parent() != this) {
+    throw std::logic_error("invalid parent on node");
+  }
   node* cp = child.get();
   children_[child->name()] = std::move(child);
   callback_.children_altered(*this);
   return cp;
 }
 
-void branch::removeChild(std::string name) {
+void branch::remove_child(std::string name) {
   assert(children_.count(name));
   children_.erase(name);
   callback_.children_altered(*this);

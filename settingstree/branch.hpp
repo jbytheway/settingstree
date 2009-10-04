@@ -38,8 +38,8 @@ class branch : public node {
         const user& user
       ) const;
   public:
-    node* addChild(node::ptr child);
-    void removeChild(std::string name);
+    node* add_child(node::ptr child);
+    void remove_child(std::string name);
     bool is_leaf() const { return false; }
     std::set<std::string> child_names() const;
     /* Returns NULL if no such child */

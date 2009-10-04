@@ -86,7 +86,7 @@ struct branch_template {
     branch& branch_;
     template<typename ChildTemplate>
     void operator()(ChildTemplate& child) const {
-      branch_.addChild(child.node_ptr(branch_));
+      branch_.add_child(child.node_ptr(branch_));
     }
   };
 
