@@ -25,12 +25,12 @@ class leaf : public node {
     virtual std::string changeRequestListRef(
         std::list<std::string>& nodeAddress,
         const std::string& value,
-        const settings_user& client
+        const user& client
       );
     virtual boost::tuple<std::string, std::set<std::string>, node const*>
       getRequestListRef(
         std::list<std::string>& nodeAddress,
-        const settings_user& client
+        const user& client
       ) const;
     virtual std::string setValue(const std::string& v) = 0;
     virtual detail::generic_leaf_callback& callback() = 0;

@@ -1,17 +1,17 @@
-#include <settingstree/settings_user.hpp>
+#include <settingstree/user.hpp>
 
 #include <settingstree/node.hpp>
 
 namespace settingstree {
 
-settings_user::settings_user(const std::string& group) :
+user::user(const std::string& group) :
   groups()
 {
   groups.insert(group);
   groups.insert("world");
 }
 
-bool settings_user::hasGroupIn(const std::set<std::string>& groupsToCheck) const
+bool user::hasGroupIn(const std::set<std::string>& groupsToCheck) const
 {
   /* We have to determine whether the two sets groups and groupsToCheck have an
    * intersection.  I thought there would be an STL algorithm for this, but
@@ -36,12 +36,12 @@ bool settings_user::hasGroupIn(const std::set<std::string>& groupsToCheck) const
   }
 }
 
-bool settings_user::hasReadPermissionFor(node const* node) const
+bool user::hasReadPermissionFor(node const* node) const
 {
   return hasGroupIn(node->reading_groups());
 }
 
-bool settings_user::hasWritePermissionFor(node const* node) const
+bool user::hasWritePermissionFor(node const* node) const
 {
   return hasGroupIn(node->writing_groups());
 }

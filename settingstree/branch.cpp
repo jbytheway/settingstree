@@ -54,7 +54,7 @@ node* branch::getNodeByListRef(
 std::string branch::changeRequestListRef(
     std::list<std::string>& setting,
     const std::string& value,
-    const settings_user& user)
+    const user& user)
 {
   if (!user.hasReadPermissionFor(this)) {
     return std::string("cannot read node '") + full_name() +
@@ -80,7 +80,7 @@ std::string branch::changeRequestListRef(
 boost::tuple<std::string, std::set<std::string>, node const*>
 branch::getRequestListRef(
     std::list<std::string>& nodeAddress,
-    const settings_user& user
+    const user& user
   ) const
 {
   if (!user.hasReadPermissionFor(this)) {

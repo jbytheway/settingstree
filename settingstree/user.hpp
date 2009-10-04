@@ -14,18 +14,18 @@ class node;
  *
  * This class keeps track of what groups a user of the settings tree belongs to
  * so that permissions can be calculated appropriately. */
-class settings_user {
+class user {
   private:
-    settings_user();
+    user();
   protected:
     /** \brief Standard constructor
      *
      * Initializes user as a member of the groups "world" and \a group. */
-    settings_user(const std::string& group);
-    settings_user(const settings_user&);
+    user(const std::string& group);
+    user(const user&);
   public:
     /** \brief Destructor */
-    virtual ~settings_user() {}
+    virtual ~user() {}
   private:
     std::set<std::string> groups;
 

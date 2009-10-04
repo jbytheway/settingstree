@@ -32,7 +32,7 @@ node* leaf::getNodeByListRef(std::list<std::string>& nodeAddress)
 std::string leaf::changeRequestListRef(
     std::list<std::string>& nodeAddress,
     const std::string& value,
-    const settings_user& user)
+    const user& user)
 {
   //Debug("checking permissions for node " << getFullName());
   
@@ -62,7 +62,7 @@ std::string leaf::changeRequestListRef(
 boost::tuple<std::string, std::set<std::string>, node const*>
 leaf::getRequestListRef(
     std::list<std::string>& nodeAddress,
-    const settings_user& user
+    const user& user
   ) const
 {
   if (!user.hasReadPermissionFor(this)) {

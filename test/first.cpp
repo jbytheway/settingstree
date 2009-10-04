@@ -43,14 +43,14 @@ class test_branch_callback : public st::branch_callback {
   }
 };
 
-class server_user : public st::settings_user {
+class server_user : public st::user {
   public:
-    server_user() : st::settings_user("server") {}
+    server_user() : st::user("server") {}
 };
 
-class untrusted_user : public st::settings_user {
+class untrusted_user : public st::user {
   public:
-    untrusted_user() : st::settings_user("world") {}
+    untrusted_user() : st::user("world") {}
 };
 
 BOOST_AUTO_TEST_CASE(first)
