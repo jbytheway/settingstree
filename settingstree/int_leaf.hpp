@@ -25,6 +25,10 @@ class int_leaf : public leaf {
       );
     virtual ~int_leaf() {}
   private:
+    // Safe version of T to use when lexical_casting to avoid char mess
+    typedef typename boost::mpl::if_c<
+      sizeof(T) == 1, int, T
+    >::type lexical_cast_type;
     T value_;
     leaf_callback<T>& callback_;
   protected:
