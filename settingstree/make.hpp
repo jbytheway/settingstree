@@ -48,18 +48,27 @@ struct variadic_vector {
 
 template<typename T>
 struct leaf_template {
-  leaf_template(std::string name, leaf_callback<T>& callback, T value) :
-    name_(std::move(name)), callback_(callback), value_(std::move(value))
+  leaf_template(
+      std::string name,
+      leaf_callback<T>& callback,
+      T value,
+      std::string writers
+    ) :
+    name_(std::move(name)),
+    callback_(callback),
+    value_(std::move(value)),
+    writers_(std::move(writers))
   {}
 
   std::string name_;
   leaf_callback<T>& callback_;
   T value_;
+  std::string writers_;
 
   node::ptr node_ptr(branch& parent) {
     typedef typename tree_traits<T>::leaf_type leaf_type;
     node::ptr result(
-        new leaf_type(name_, "world", "", &parent, callback_, value_)
+        new leaf_type(name_, "world", writers_, &parent, callback_, value_)
       );
     return result;
   }
@@ -110,17 +119,23 @@ struct make_helper {
   leaf_template<T> operator()(
       std::string name,
       leaf_callback<T>& callback,
-      T value
+      T value,
+      std::string writers = ""
     ) const {
-    return leaf_template<T>(std::move(name), callback, std::move(value));
+    return leaf_template<T>(
+        std::move(name), callback, std::move(value), std::move(writers)
+      );
   }
 
   leaf_template<std::string> operator()(
       std::string name,
       leaf_callback<std::string>& callback,
-      char const* value
+      char const* value,
+      std::string writers = ""
     ) const {
-    return leaf_template<std::string>(std::move(name), callback, value);
+    return leaf_template<std::string>(
+        std::move(name), callback, value, std::move(writers)
+      );
   }
 
   template<typename... Children>
