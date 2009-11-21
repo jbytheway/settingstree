@@ -4,13 +4,6 @@
 
 namespace settingstree {
 
-user::user(const std::string& group) :
-  groups()
-{
-  groups.insert(group);
-  groups.insert("world");
-}
-
 bool user::hasGroupIn(const std::set<std::string>& groupsToCheck) const
 {
   /* We have to determine whether the two sets groups and groupsToCheck have an
@@ -18,11 +11,11 @@ bool user::hasGroupIn(const std::set<std::string>& groupsToCheck) const
    * here doesn't appear to be.  There is the "setintersection" algorithm, but
    * that won't abort when it finds an intersection.  So, we do it "by hand" */
   
-  std::set<std::string>::const_iterator i1 = groups.begin();
+  std::set<std::string>::const_iterator i1 = groups_.begin();
   std::set<std::string>::const_iterator i2 = groupsToCheck.begin();
 
   while (true) {
-    if (i1 == groups.end()) {
+    if (i1 == groups_.end()) {
       return false;
     } else if (i2 == groupsToCheck.end()) {
       return false;
