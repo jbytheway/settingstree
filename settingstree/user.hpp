@@ -22,7 +22,7 @@ class user {
      * \a groups. */
     template<typename... String>
     user(String&&... groups);
-    user(const user&) = default;
+    user(const user&);
   public:
     /** \brief Destructor */
     virtual ~user() = 0;
@@ -56,6 +56,7 @@ class user {
     bool hasWritePermissionFor(const node* node) const;
 };
 
+inline user::user(const user&) = default;
 inline user::~user() = default;
 
 template<typename... String>
