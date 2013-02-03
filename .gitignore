@@ -4,4 +4,6 @@
 *.la
 .*.swp
 /config.mk
+/user.mk
 /*/Makefile
+/release
